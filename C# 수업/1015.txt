@@ -47,3 +47,19 @@ System : 네임 스페이스 소속 분류이름(자바의 패키지) /콘솔 : 클래스 / 롸이트 라인
 
 상수로 만들면 Static으로 
 
+
+#3
+
+visual studio폴더 => 개발자 명령 프롬포트 열기 
+
+1. 
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community>cd \
+
+2.
+C:\>cd C:\GitHub\csharp\HelloWorld\ConsoleApp3\
+
+3.
+C:\GitHub\csharp\HelloWorld\ConsoleApp3>csc Program.cs
+
+4. 
+C:\GitHub\csharp\HelloWorld\ConsoleApp3>Program
