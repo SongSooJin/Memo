@@ -542,7 +542,19 @@ CONNECT BY nocycle PRIOR EMPNO = MGR;
 
 
 
+-------------------SQL디벨로퍼 실행 
+select * from dba_objects where object_name = 'DUAL';
 
+select * from emp;
+
+select * from user_tab_columns where table_name = 'EMP' order by column_id;
+
+select vsize(empno) , length ('안녕TA'), lengthb('안녕TA') from emp;
+
+select * from  user_tables where table_name = 'EMP';
+
+select * from emp;
+desc emp
 
 
 
