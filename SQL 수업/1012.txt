@@ -1,0 +1,553 @@
+2018/10/12
+
+SQL 수업
+
+#1
+
+제품 구분별로 월별 총액을 구하라.
+
+1. @year ==> select * from sale where to_char(sale_date,'yyyy') = @year;
+2. slelect sum(decode(to_char(sale_date,'mm'), '01', sale_amount)) jan_amount,
+      	sum(decode(to_char(sale_date,'mm'), '02', sale_amount)) jan_amount,
+	sum(decode(to_char(sale_date,'00'),'01',1))jan_count,
+3. select gubun, ... from sale where @year group by gubun;
+
+
+#2
+
+select nullif(sal,nvl(comm,0)+sal)
+
+if sal = nvl(comm,0)+sal than
+	null; 
+esle 
+	sal;
+retrun
+
+수당이 NULL 인 사원은 sal을 null이 아니면 sal_comm을 nullif,nvl2를 이용하여 출력하세요.
+=> select sal, comm, nvl2(nullif(sal,nvl(comm,0)+sal),sal+comm,sal),nvl(sal,0)+nvl(comm,0) from emp;
+
+
+#3
+
+user_tab_columns ==> where table_name ==> emp order by column_id;
+select * from user_tab_columns where table_name = 'EMP' order by column_id;
+
+select vsize(empno) , length ('안녕TA'), lengthb('안녕TA') from emp;
+		=>               3                      4 
+
+select * from  user_tables where table_name = 'EMP';
+=> num_rows / block / AVG_ROW_LENGTH  세개는 확인하자.
+
+
+#4
+
+DML + DML
+
+서브쿼리 select select
+
+1. 스칼라 서브쿼리 (scalar sub_query)
+
+select empno,ename,deptno, 
+	(select dname from dept where dept .deptno = emp.deptno)
+from emp;
+
+
+2. 인라인뷰 (in_line_view)
+
+select empno,ename, a.deptno, dname
+from emp a, (select deptno, dname from dept)b
+where a.deptno = b.deptno;
+
+
+3. 네스티드 서브쿼리 (nested sub_query)
+
+select * from emp where deptno = (select deptno from emp where ename = 'SMITH');
+(== select * from emp where deptno = 20;)
+
+select * from emp where deptno = (select deptno from emp where ename in ('SMITH')('ALNEN'));
+
+ 3-1 상관서브쿼리 (co-related sub query)
+
+        select deptno, ename, sal from emp e1    
+        where sal = (select max(sal) from emp e2                  
+        where e1.deptno = e2.deptno)     
+        order by deptno; 
+
+
+ex 1)
+emp 테이블에서 급여가 가장 적은 사원의 이름과 급여를 출력하는 예문이다. (네스티드 서브쿼리 구현)
+
+네스티드 서브쿼리
+select ename, sal from emp where sal  = (select min(sal) from emp);
+
+인라인뷰 
+select ename, sal
+from emp a, (select min(sal) min_sal from emp)b
+where a.sal = b.min_sal;
+
+
+ex 2)
+EMP 테이블에서 부서코드가 30번인 부서의 급여 최소값 보다
+(select min(sal) from emp where deptno = 30)
+해당 부서 급여의 최소값이 큰 부서 만 
+출력하되 부서 순으로 오름차순으로 정렬 하시오. 
+
+select e1.deptno, min(sal)
+from emp e1
+group by e1.deptno
+having min(e1.sal) > (select min(sal) from emp where deptno = 30) 
+order by e1.deptno asc;
+
+
+select e1.deptno, min(sal) 
+from emp e1 
+group by e1.deptno
+having min(sal) > (select min(sal) from emp where deptno = 30)
+order by e1.deptno;
+
+
+
+
+(이 예문에서 기억 해야 하는 사실은 
+첫째 서브 쿼리는 WHERE절 뿐 아니라 HAVING절에서도 사용 가능하며 
+둘째 WHERE절이 각 행에 조건을 줘서 선택되는 행을 제어 하듯이 HAVING절은 GROUP BY에 의해 
+그룹화 되는 그룹에 조건을 줄 때 사용 하는 것으로 반드시 HAVING은 GROUP BY 뒤에 와야 하며, 
+셋째 HAVING이 사용되면 대부분 GROUP BY가 있지만 GROUP BY 없는 HAVING의 사용도 가능 하다. 
+넷째 ORDER BY절은 SELECT문 의 마지막에 오며, 
+
+중요!!!다섯째 SELECT절에 그룹 함수 외의 컬럼이 나타나면 반드시 
+GROUP BY절에 해당 컬럼이 나타나야 한다. )
+
+select deptno,job, max(sal) from emp group by job; => 오류
+select deptno,job, max(sal) from emp group by job,deptno;
+
+
+EMP Table에는 여러 종류의 직무(JOB)가 있다. 
+다음 예문은 각 JOB의 평균 급여가 최대인 JOB과 그 평균 급여를 출력 하는 예문이다
+select job, avg(sal) 
+from emp --1  
+group by job  --2
+having avg(sal) = (select max(avg(sal)) from emp group by job); --3
+
+1.부서코드가 10인 사원 중 최대/최소 급여를 받는 사원의 이름,급여,부서를 출력
+
+select ename,sal, deptno
+from emp
+where (deptno = 10 and sal = (select max(sal) from emp where deptno = 10))
+or      (deptno = 10 and sal = (select min(sal) from emp where deptno = 10))
+
+select ename,sal,deptno
+from emp
+where deptno = 10 
+and sal in ((select max(sal) from emp where deptno = 10),
+	(select min(sal) from emp where deptno = 10));
+
+select a.ename, a.sal, a.deptno
+from emp a , (select max(sal) max_sal , min(sal) min_sal
+	      from emp
+	      where deptno = 10) b
+where a.sal = b.max_sal or a.sal = b.min_sal;
+
+2. SMITH와 같은 JOB, 같은 부서를 가지는 사원의 이름,직무,부서를 출력하는데 
+SMITH는 출력하지 마시오
+
+네스티드 서브쿼리 => 가독성이 좋지만 속도가 느림
+select ename,job,deptno
+from emp
+where ename != 'SMITH'
+and job = (select job from emp where ename = 'SMITH');
+
+
+인라인뷰 => 속도가 빠름 
+select a.ename, a.job, a.deptno
+from emp a,(select job from emp where ename = 'SMITH')b
+where a.job = b.job and a.ename <> 'SMITH'
+
+
+
+#5
+
+-EMP 테이블에서 각 부서별로 급여를 가장 적게 받는 사원의 부서, 이름, 급여를 출력 하는 예문이다. 
+IN 연산자 오른쪽 서브 쿼리에서 리턴되는 행(ROW)은 여러 건이다. 
+아마도 부서별로 가장 적은 급여가 추출되어 Outer Query와 IN 연산자에 의해 비교되는 것이다. 
+결국 부서별로 급여를 가장 적게 받는 사원을 선택 하게 되는데 IN연산자는 OR로 풀어 쓸 수 있음을 
+기억 하자. 
+
+
+pair-wise 기법 
+select deptno, ename , sal
+from emp
+where (deptno, sal) in (select deptno, min(sal)
+			from emp
+			group by deptno);
+
+
+-- 위와 같은 WHERE 비교를 PAIRWISE방식이라 한다. 
+
+즉 칼럼을 쌍으로 묶어서 비교하는 것이다. 
+만 약 아래처럼 쿼리문을 작성한다면 예상치 못한 결과가 나올 수도 있다. 
+현재 EMP 테이블은 다행히도 10번 부서의 최소급여인 1300을 다른 부서사원들이 가지고 있지 않아서 
+PAREWISE 방식으로 안 하더 라도 결과는 같이 나온다.  만약 20번 부서 사원이 1300을 가지고 있다면 
+그 사원도 출력될 것이다. 
+
+
+select  a.deptno, a.ename , a.sal
+from emp a,(select deptno, min(sal) min_sal 
+	from emp
+	group by deptno) b
+where a.deptno = 10
+and a.sal = 1300;
+=> a와 b의 관계설정을 하지 않았기 때문에 필요없는 b값 까지 나온다.
+
+select  a.deptno, a.ename , a.sal
+from emp a,(select deptno, min(sal) min_sal 
+	from emp
+	group by deptno) b
+where a.deptno = 10
+and a.deptno = b.deptno;
+and a.sal = 1300;
+
+
+
+select deptno, ename, sal 
+from emp 
+where sal in (select min(sal)
+	 from emp               
+	group by deptno) 
+and deptno in (select distinct deptno from emp); 
+
+
+select empno, sal
+from emp
+ where sal> any (2000,3000,4000)
+
+
+
+#6
+
+상관 서브쿼리  
+: 서브 쿼리와 메인쿼리간에 서로 상관 참조하는 쿼리
+=> where e1.deptno = e2.deptno) 
+
+급여별로 맥시범 받는사람 뽑아줘 
+select deptno, ename, sal 
+from emp e1     
+where sal = (select max(sal) 
+	from emp e2                  
+	where e1.deptno = e2.deptno
+	and    e1.job = e2.job)     
+order by deptno; 
+
+1. select deptno, ename, sal from emp e1 
+   emp e1 메인쿼리에서 한건을 읽어온다.
+   => SMITH,20,800
+        ALLEN,30,1600 
+select deptno, ename, sal 
+
+from emp e1     
+where sal = (select max(sal) 
+	from emp e2                  
+	where e2.deptno = 20)     
+order by deptno; 
+
+
+2. select max(sal) from emp e2
+    where e2.deptno = 20;
+    => 3000
+         2850	
+3. select deptno, ename,sal
+    from emp e1
+    where sal = 3000;
+    =>
+       SCOTT    20        3000
+       FORD     20        3000
+ 
+     where sal = 2850;
+    =>
+       BLAKE   30         2850	
+4. 1번에서 읽은 SMITH, 3번에 읽은 SCOTT FORD가 
+    같은지 비교한다. 같으면 select에 가져오고 
+    않같으면 select 에 안 가져오고 버린다.
+
+=> 맥시멈이 같으면 추출 아니면 버림 
+
+
+5. 위의 1,2,3,4를 반복해서 수행한다.(14번수행)
+
+
+select deptno, ename, sal 
+from emp e1     
+where sal = (select max(sal) 
+	from emp e2                  
+	where e1.deptno = e2.deptno   
+order by deptno; 
+
+
+select e1.deptno, e1.ename, e1.sal 
+from emp e1 ,(select deptno, max(sal) max_sal
+	from emp
+	group by deptno) e2
+where e1.deptno = e2.deptno
+and e1.sal = e2.max_sal
+order by e1.deptno; 
+
+
+select deptno, job, ename ,sal from emp order by deptno, job, sal desc;
+
+select deptno, ename, sal 
+from emp e1     
+where sal = (select max(sal) 
+	from emp e2                  
+	where e1.deptno = e2.deptno
+	and    e1.job = e2.job)     
+order by deptno; 
+
+
+select e1.deptno, e1.ename, e1.sal, e1.job
+from emp e1 ,(select deptno, job, max(sal) max_sal
+	from emp
+	group by deptno, job) e2
+where e1.deptno = e2.deptno
+and e1.job = e2.job
+and e1.sal = e2.max_sal
+order by e1.deptno,e1.job; 
+
+
+
+
+ex1)
+
+select deptno, ename, sal
+from emp e1
+where sal = (select max(sal) from emp e2
+	where e1.deptno = e2.deptno)
+order by deptno;
+
+
+1. 인라인뷰
+
+select a.deptno, a.sal
+from emp a,(select deptno, max(sal) max_sal
+	from emp
+	group by deptno) b
+where a.deptno = b.deptno
+order by a.deptno;
+
+
+2. pair-wise
+
+select ename, sal, deptno  
+from emp  
+where (deptno, sal ) in (select deptno, max(sal) 
+			from emp                               
+			group by deptno)       
+order by deptno; 
+ 
+
+
+각 직무 (job)별로 최대 급여를 받는 사원의 직무,이름, 급여를 출력하는데 
+직무명으로 오름차순 정렬하여 출력하는 예문
+
+1. 상관 서브 쿼리
+
+select job, ename, sal 
+from emp e1     
+where sal = (select max(sal) 
+		from emp e2                  
+		where e1.job = e2.job)     
+order by deptno; 
+
+
+2. 인라인뷰
+
+select a.job, a.ename, a.sal
+from emp a, ( select job, max(sal) max_sal
+		from emp
+		group by job)b
+where a.job = b.job
+order by a.job;
+ 
+
+3. PAIR WISE 기법 
+
+select job, ename, sal
+from emp
+where (job, sal) in (select job, max(sal) max_sal
+		from emp group by job)
+order by job;
+
+=> 직업별로 많이 받는 사람 추출 
+
+
+ex) 
+select ename, sal from emp e1
+where 5 > (select count(*) from emp e2
+ 	   where e2.sal > e1.sal
+                 and e1.deptno = e2.deptno)
+order by sal desc;
+
+응용) 
+select deptno, ename, sal from emp e1     
+where 1 > (select count(*) from emp e2                
+	where e2.sal > e1.sal
+	and e1.deptno = e2.deptno)     
+order by deptno,sal desc; 
+
+응용2)
+select rownum, a .*
+from (select * from emp order by sal desc) a
+where rownum <= 5;
+
+1. 
+select ename, sal from emp e1   
+=> SMITH             800
+=> ALLEN            1600
+=> ... SCOTT            3000
+
+2.
+select count(*) from emp e2                
+	where e2.sal > 800;
+		       1600
+		       3000		
+=> 13 
+=> 6
+=> 1
+
+3. select count(*) from emp e2                
+	where 5 > 13
+=> 5> 13은 false라서 select (fetch)안함
+=> 5> 6은 false라서 select (fetch)안함
+=> 1> 은 true 라서 select (fatch) 함
+
+4. 1,2,3을 반복한다.
+=> SCOTT
+
+
+@  -사원이 한명이라도 있는 부서명 출력 
+SELECT dname FROM dept d     
+WHERE EXISTS ( SELECT 1 
+		FROM emp 
+		WHERE deptno = d.deptno); 
+=> 패턴 외우기 
+
+
+#7
+
+
+-사원테이블과 부서테이블을 조인하여 사번, 사원명, 부서코드, 부서명을 추출한다고 하자
+select empno, ename, emp.deptno, dname from emp, dept 
+where emp.deptno = dept.deptno; 
+
+
+=> 스칼라 커브 쿼리
+select empno, ename, deptno, 
+(select dname from dept where emp.deptno = dept.deptno)    
+from emp; 
+
+ 
+#8
+
+join
+
+1. ORACLE
+ 1-1. (INNER) JOIN
+ 1-2. OUTER JOIN
+   가. LEFT OUTER JOIN (+)
+   나. RIGHT OUTER JOIN
+
+2. ANSI
+ 2-1. (INNER) JOIN
+ 2-2. OUTER JOIN
+   가. LEFT OUTER JOIN
+   나. RIGHT OUTER JOIN
+   다. FULL OUTER JOIN
+
+
+* 오라클조인
+select empno, ename, sal, a.deptno, b.*
+from emp a, dept b
+where a.deptno = b.deptno(+);
+
+=> 라이트 아우터 조인으로
+
+select empno, ename, sal, a.deptno, b.*
+from dept b, emp a
+where a.deptno(+) = b.deptno;
+
+
+* 안시조인
+select empno, ename, sal, a.deptno, b.*
+from emp a left outer join dept b 
+on a.deptno = b.deptno;
+
+=> 라이트 아우터 조인으로
+
+select empno, ename, sal, a.deptno, b.*
+from dept b left outer join emp a
+on a.deptno = b.deptno;
+
+풀 아우터 조인
+select ename, emp.deptno, dept.deptno, dname 
+from emp full outer join dept 
+on emp.deptno = dept.deptno
+order by emp.deptno
+
+아우터 조인의 아우터 조인은 안걸린다
+
+
+select  empno,ename, sal, a.deptno, d. * 
+from emp a , dept b
+* where a.deptno = b.deptno (+);
+
+
+select empno,ename, deptno, from emp;
+
+select * from dept;
+
+select ename, emp.deptno, dname from emp, dept where emp.deptnp = dept.deptno;
+
+
+#9
+
+오라클 계층형 쿼리
+
+https://cafe.naver.com/kosta75/1379
+
+dept , emp
+school , student 
+
+
+rowid , rownum : 가상컬럼 
+
+SELECT  EMPNO, ENAME,         
+CONNECT_BY_ROOT ENAME,         
+SYS_CONNECT_BY_PATH(ENAME, '/') 경로 
+FROM EMP 
+START WITH MGR IS NULL  --시작데이터를 지정 
+CONNECT BY PRIOR EMPNO = MGR; 
+--상위(부모)의 EMPNO를 MGR값으로 가지는  데이터가 다음 연결될 데이터이다. 이 연결고리를 지정 
+
+SELECT  EMPNO, ENAME, prior ENAME,         
+CONNECT_BY_ROOT ENAME,         
+SYS_CONNECT_BY_PATH(ENAME, '/'),
+connect_by_isleaf,
+level,
+connect_by_iscycle
+FROM EMP 
+START WITH ename = 'KING'
+CONNECT BY nocycle PRIOR EMPNO = MGR; 
+--상위(부모)의 EMPNO를 MGR값으로 가지는  데이터가 다음 연결될 데이터이다. 이 연결고리를 지정 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

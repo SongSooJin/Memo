@@ -1,0 +1,13 @@
+2018/09/17
+
+https://store.musinsa.com/app/product/detail/621274/0
+
+
+
+ecma 폴더 생성 => 안에 dist / src생성 => src폴더안에 ---.es6파일 2개 생성
+=> ecma폴더에 .babelrc 파일 생성 => ecma폴더 cmd실행 => npm init -y 출력
+=> npm i --save-dev babel-preset-env 출력 => 확인 (es6의 파일이 .js로 추가로 생김)
+ 
+
+
+

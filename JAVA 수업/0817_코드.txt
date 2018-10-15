@@ -1,0 +1,194 @@
+2018/08/17
+
+자바수업 _ 코드
+
+////7-12
+//class Card2 {
+//	final int NUMBER;		// 상수지만 선언과 함께 초기화 하지 않고
+//	final String KIND;		// 생성자에서 단 한번만 초기화할 수 있다.
+//	static int width  = 100;	
+//	static int height = 250;
+//
+//	Card2(String kind, int num) {	
+//		KIND = kind;
+//		NUMBER = num;
+//	}
+//
+//	Card2() {
+//		this("HEART", 1);
+//	}
+//
+//	public String toString() {
+//		return KIND +" "+ NUMBER;
+//	}
+//}
+//
+//class FinalCardTest {
+//	public static void main(String args[]) {
+//		Card2 c = new Card2("HEART", 10);
+////		c.NUMBER = 5;
+//		System.out.println(c.KIND);
+//		System.out.println(c.NUMBER);
+//		System.out.println(c); // System.out.println(c.toString());
+//	}
+//}
+
+
+////7-15
+//class CastingTest1 {
+//	public static void main(String args[]) {
+//		Car car = null;
+//		FireEngine fe = new FireEngine();
+//		FireEngine fe2 = null;
+//
+//		fe.water();
+//		car = fe;    // car =(Car)fe;에서 형변환이 생략된 형태다. (업캐스팅)
+////		car.water();	
+//		fe2 = (FireEngine)car; // 자손타입 ← 조상타입 (다운캐스팅)
+//		fe2.water();
+//	}
+//}
+//
+//class Car {
+//	String color;
+//	int door;
+//
+//	void drive() { 		// 운전하는 기능
+//		System.out.println("drive, Brrrr~");
+//	}
+//
+//	void stop() {		// 멈추는 기능	
+//		System.out.println("stop!!!");	
+//	}
+//}
+//
+//class FireEngine extends Car {	// 소방차
+//	void water() {		// 물을 뿌리는 기능
+//		System.out.println("water!!!");
+//	}
+//}
+
+
+////7-17
+//class InstanceofTest {
+//	public static void main(String args[]) {
+//		
+//		FireEngine2 fe = new FireEngine2();
+//		
+//		// instanceof 연산자는 true false 리턴한다.,
+//		System.out.println(fe instanceof FireEngine2);
+//		
+//		// fe 변수가 가리키는 객체는 FireEngin2 클래스 설계도로 만들었는가?
+//		if(fe instanceof FireEngine2) {
+//			System.out.println("This is a FireEngine2 instance.");
+//		} 
+//
+//		// fe 변수가 가리키는 객체는 FireEngin2 클래스 설계도로 만들어졌거나 상속관계에 의하여 Car2 노릇을 수행할 수있는가?
+//		if(fe instanceof Car2) {
+//			System.out.println("This is a Car2 instance.");
+//		} 
+//
+//		if(fe instanceof Object) {
+//			System.out.println("This is an Object instance.");
+//		} 
+//
+//		System.out.println(fe.getClass().getName()); // 클래스의 이름을 출력
+//	}
+//} // class
+//class Car2 {}
+//class FireEngine2 extends Car2 {}
+
+
+////7-18
+//class BindingTest{
+//	public static void main(String[] args) {
+//		Parent3 p = new Child3(); 
+//		Child3  c = new Child3();
+//
+//		// 상속관계에서 
+//		// 변수는 은닉되고 == 지칭하는 자료형에 따라 변수가 사용된다.
+//		// 메소드는 재정의 된다. == 지칭하는 자료형과 관계없이 실체에 가자 가까운 메소드가 사용된다.
+//		System.out.println("p.x = " + p.x);
+//		p.method();
+//
+//		System.out.println("c.x = " + c.x);
+//		c.method();
+//	}
+//}
+//
+//class Parent3 {
+//	int x = 100;
+//
+//	void method() {
+//		System.out.println("Parent Method");
+//	}
+//}
+//
+//class Child3 extends Parent3 {
+//	int x = 200;
+//
+//	void method() {
+//		System.out.println("Child Method");
+//	}
+//}
+
+////7-21
+//class Product {
+//	int price;			// 제품의 가격
+//	int bonusPoint;		// 제품구매 시 제공하는 보너스점수
+//
+//	Product(int price) {
+//		this.price = price;
+//		bonusPoint =(int)(price/10.0);	// 보너스점수는 제품가격의 10%
+//	}
+//}
+//
+//class Tv3 extends Product {
+//	Tv3() {
+//		// 조상클래스의 생성자 Product(int price)를 호출한다.
+//		super(100);			// Tv의 가격을 100만원으로 한다.
+//	}
+//	
+//	@Override
+//	public String toString() {	// Object클래스의 toString()을 오버라이딩한다.
+//		return "Tv";
+//	}
+//}
+//
+//class Computer extends Product {
+//	Computer() {
+//		super(200);
+//	}
+//
+//	public String toString() {
+//		return "Computer";
+//	}
+//}
+//
+//class Buyer {			// 고객, 물건을 사는 사람
+//	int money = 1000;	// 소유금액
+//	int bonusPoint = 0;	// 보너스점수
+//
+//	void buy(Product p) {
+//		if(money < p.price) {
+//			System.out.println("잔액이 부족하여 물건을 살수 없습니다.");
+//			return;
+//		}
+//
+//		money -= p.price;			// 가진 돈에서 구입한 제품의 가격을 뺀다.
+//		bonusPoint += p.bonusPoint;	// 제품의 보너스 점수를 추가한다.
+//		System.out.println(p + "을/를 구입하셨습니다.");
+//	}
+//}
+//
+//class PolyArgumentTest {
+//	public static void main(String args[]) {
+//		Buyer b = new Buyer();
+//
+//		b.buy(new Tv3());
+//		b.buy(new Computer());
+//
+//		System.out.println("현재 남은 돈은 " + b.money + "만원입니다.");
+//		System.out.println("현재 보너스점수는 " + b.bonusPoint + "점입니다.");
+//	}
+//}

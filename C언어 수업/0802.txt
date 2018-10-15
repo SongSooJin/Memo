@@ -1,0 +1,79 @@
+2018/08/02
+
+C언어 수업
+
+1-1 5단까지만 입력 
+
+for (i = 2; i <= 9; i++) {
+	if(i <=5){
+		for (j = 1; j <= 9; j++) {
+		k = i * j;
+		printf("%d * %d= %d\n", i, j, k);
+		}
+
+	}
+	else {
+		break;
+	}
+
+
+1-2 홀수단만 입력
+
+for (i = 2; i <= 9; i++) {
+	if (i % 2 ==1) {
+		for (j = 1; j <= 9; j++) {
+		k = i * j;
+		printf("%d * %d= %d\n", i, j, k);
+		}
+	}
+	else{
+		continue;
+	}	
+	
+
+1-3 홀수단의 3으로 나누어 떨어지는 곱
+
+for (i = 2; i <= 9; i++) {
+	for (j = 1; j <= 9; j++) {
+		if (i % 2 == 1 && j % 3 == 0) {
+		k = i * j;
+		printf("%d * %d= %d\n", i, j, k);
+		}
+	}
+	
+
+
+1-1홀수단의 짝수 
+
+for (i = 2; i <= 9; i++) {
+if (j % 2 ==1) {
+	continue;
+}
+else {
+k = i*j;
+printf("%d * %d= %d\n",i ,j ,k);
+}
+
+1-1 홀수단의 5의곱만 
+
+if (j != 5) {
+	continue;
+}
+
+else {
+k = i*j;
+printf("%d * %d= %d\n",i ,j ,k);
+}
+
+
+
+if (j % 3 != 0) {
+k = i * j;
+printf("%d * %d= %d\n", i, j, k);
+	}
+
+
+회전 
+행과 열의 합한값 - 행 = 열 
+
+점수는 낮아지지만 석차는 올라가면 내림차순

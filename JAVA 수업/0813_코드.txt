@@ -1,0 +1,741 @@
+2018/08/13
+
+자바수업_코드
+
+////5-1
+//class ArrayEx01 {
+//	public static void main(String[] args) { 
+//		
+//		// 배열()
+//		// 같은 자료형의 데티어 여러개를 허ㅏ하나로 몪어서 다루는 객체입니다.
+//
+//		
+//		String[] names = new String[3]; // 배열 선언시 반드시 보관하는 게이터
+//		names[0] = "Spring";
+//		names[1] = "Summer";
+//		names[2] = "Autumn";
+//		
+//		//Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+//			//Duplicate local variable names
+//		names[3]= "x";
+//
+//		
+//		int[] score = new int[5];
+//		int k = 1;
+//
+//		score[0] = 50;
+//		score[1] = 60;
+//		score[k+1] = 70;   // score[2] = 70
+//		score[3] = 80;
+//		score[4] = 90;
+//
+//		int tmp = score[k+2] + score[4];  // int tmp = score[3] + score[4]
+//
+//	    // for문으로 배열의 모든 요소를 출력한다.
+//		for(int i=0; i < 5; i++) {
+//			System.out.printf("score[%d]:%d%n",i, score[i]);		
+//		}
+//
+//		System.out.printf("tmp:%d%n", tmp);
+//		System.out.printf("score[%d]:%d%n",7,score[7]); //index의 범위를 벗어난 값
+//	} // main
+//}
+
+
+////5-2
+//import java.util.*;  // Arrays.toString()을 사용하기 위해 추가
+//
+//class ArrayEx02 {
+//	public static void main(String[] args) {
+////		String[] names = new String[3];
+////		names[0] = "Spring";
+////		names[1] = "Summer";
+////		names[2] = "Autumn";
+//			
+//		String[] names = {"Spring", "Summer", "Autumn"};
+//		System.out.println(Arrays.toString(names));
+//
+//		
+//		int[] iArr1 = new int[10];
+//		int[] iArr2 = new int[10];
+////		int[] iArr3 = new int[]{100, 95, 80, 70, 60};
+//		int[] iArr3 = {100, 95, 80, 70, 60};
+//		char[] chArr = {'a', 'b', 'c', 'd'};
+//
+//		for (int i=0; i < iArr1.length ; i++ ) {
+//			iArr1[i] = i + 1; // 1~10의 숫자를 순서대로 배열에 넣는다.
+//		}
+//
+//		for (int i=0; i < iArr2.length ; i++ ) {
+//			iArr2[i] = (int)(Math.random()*10) + 1; // 1~10의 값을 배열에 저장
+//		}
+//
+//		// 배열에 저장된 값들을 출력한다.
+//		for(int i=0; i < iArr1.length;i++) {
+//			System.out.print(iArr1[i]+",");	
+//		}
+//		System.out.println();													
+//		System.out.println(Arrays.toString(iArr2));
+//		System.out.println(Arrays.toString(iArr3));
+//		System.out.println(Arrays.toString(chArr));
+//		System.out.println(iArr3);
+//		System.out.println(chArr);
+//	}
+//}
+
+////5-3
+//class ArrayEx03{
+//	public static void main(String[] args) {
+//		int[] arr = new int[5];
+//
+//		// 배열 arr에 1~5를 저장한다.
+//		for(int i=0; i < arr.length;i++) 
+//			arr[i] = i + 1;
+//
+//		System.out.println("변경전 - arr.length:"+arr.length);	
+//		for(int i=0; i < arr.length;i++) 
+//			System.out.println("arr["+i+"]:"+arr[i]);	
+//
+//		int[] tmp = new int[arr.length*2];
+//
+//		// 배열 arr에 저장된 값들을 배열 tmp에 복사한다.
+//		for(int i=0; i < arr.length;i++) 
+//			tmp[i] = arr[i];
+//
+//		arr = tmp;  // tmp에 저장된 값을 arr에 저장한다.
+//
+//		System.out.println("변경후 - arr.length:"+arr.length);	
+//		for(int i=0; i < arr.length;i++) 
+//			System.out.println("arr["+i+"]:"+arr[i]);	
+//	}
+//}
+
+////5-4
+//import java.util.Arrays;
+//
+//class ArrayEx04 {
+//	public static void main(String[] args) {
+//		char[] abc = { 'A', 'B', 'C', 'D'};
+//		char[] num = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+//		System.out.println(abc);
+//		System.out.println(num);
+//
+//		// 배열 abc와 num을 붙여서 하나의 배열(result)로 만든다.
+//		char[] result = new char[abc.length+num.length];
+//		
+//		// System.arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
+//		System.arraycopy(abc, 0, result, 0, abc.length);
+//		System.out.println("==================================");
+//		System.out.println(Arrays.toString(result));
+//		System.arraycopy(num, 0, result, abc.length, num.length);
+//		System.out.println(result);
+//
+//		// 배열 abc을 배열 num의 첫 번째 위치부터 배열 abc의 길이만큼 복사
+//		System.arraycopy(abc, 0, num, 0, abc.length);	
+//		System.out.println(num);
+//
+//	     // number의 인덱스6 위치에 3개를 복사
+//		System.arraycopy(abc, 0, num, 6, 3);
+//		System.out.println(num);
+//	}
+//}
+
+
+////5-5
+//class ArrayEx05 {
+//	public static void main(String[] args) {
+//		
+//		// example(); 
+//		
+//		int[] score = {100, 88, 100, 100, 90};
+//		
+//	// 코드를 완성하세요 	
+//		int sum;
+//		float average;
+//		
+////		System.out.println("총점 : " + sum);
+////		System.out.println("평균 : " + average);
+////		
+//	}		
+//	
+//	private static void example() {
+//		// TODO Auto-generated method stub
+//		
+//		int sum =0;				// 총점을 저장하기 위한 변수
+//		float average = 0f;		// 평균을 저장하기 위한 변수
+//
+//		int[] score = {100, 88, 100, 100, 90};
+//
+//		for (int i=0; i < score.length ; i++ ) {
+//			sum += score[i];
+//		}
+//
+//		average = sum / (float)score.length ; // 계산결과를 float로 얻기 위함.
+//
+//		System.out.println("총점 : " + sum);
+//		System.out.println("평균 : " + average);
+//	}
+//}
+
+////5-6
+//class ArrayEx06 { 
+//	public static void main(String[] args) { 
+//	//	example();
+//		
+//		//문제 : 고객의 주문 
+//		int[] score = { 79, 88, 91, 33, 100, 55, 95}; 
+//		
+//		// 중간 처리 코드를 작성하여 프로그램을 완성하시오.
+//		int max = Integer.MIN_VALUE;
+//		int min = Integer.MAX_VALUE;
+//		
+//		for (int i=0; i<=score.length; i++) {
+//			
+//			if (score[i] > max) { // 배열에서 꺼낸 값이 max보다 크면, 그 큰값을 max에 넣는다.
+//				max = score[i];
+//			}
+//			if(score[i] < min) { // 배열에서 꺼낸 값이 min값보다 작으면 , 그 작은 값을 main에 담는다.
+//				min = score[i];
+//			}
+//			
+//		}
+//	
+//		System.out.println("최대값 :" + max);       
+//		System.out.println("최소값 :" + min);  
+//		
+//		
+//	}
+//	private static void example() {
+//		// TODO Auto-generated method stub
+//		int[] score = { 79, 88, 91, 33, 100, 55, 95}; 
+//
+//		int max = score[0]; // 배열의 첫 번째 값으로 최대값을 초기화 한다. 
+//		int min = score[0]; // 배열의 첫 번째 값으로 최소값을 초기화 한다. 
+//
+//		for(int i=1; i < score.length;i++) {
+//			if(score[i] > max) {
+//				/// max가 가진 값보다 score[i]가 가진값이 크면 그 큰값을 max에 할당한다.
+//				max = score[i];	
+//			} 
+//			
+//			else if(score[i] < min) { 
+//				min = score[i]; 
+//			} 
+//			
+//		} // end of for 
+//
+//		System.out.println("최대값 :" + max);       
+//		System.out.println("최소값 :" + min);       
+//	} // end of main 
+//
+//} // end of class 
+
+////5-7
+//import java.util.Arrays;
+//
+//class ArrayEx07 {
+//	public static void main(String[] args) {
+//		// 배열의 방들에 있는 값을 섞는다.
+//		int[] numArr = new int[10];
+//
+//		for (int i=0; i < numArr.length ; i++ ) {
+//             numArr[i] = i;  // 배열을 0~9의 숫자로 초기화한다.
+//			//System.out.print(numArr[i]);  
+//		}
+//		// System.out.println();
+//		System.out.println(Arrays.toString(numArr));
+//		System.out.println();
+//		
+//		for (int i=0; i < 100; i++ ) {
+//			int n = (int)(Math.random() * 10);	// 0~9중의 한 값을 임의로 얻는다.
+//
+//			int tmp = numArr[0];
+//			numArr[0] = numArr[n];
+//			numArr[n] = tmp;
+//		}
+//
+//		for (int i=0; i < numArr.length ; i++ )
+//			System.out.print(numArr[i]);		
+//	} // main의 끝
+//}
+
+
+////5-8
+//import java.util.Arrays;
+//import java.util.Random;
+//
+//class ArrayEx08 {
+//
+//	static Random rnd = new Random();
+//
+//	public static void main(String[] args) {
+//		// example();
+//
+//		int[] lottoNumbers = new int[6];
+//		int num = 0;
+//
+//		for (int i = 0; i < lottoNumbers.length; i++) {
+//			 num = rnd.nextInt(45); // (int) (Math.random() * 45)+1;
+//			 
+//			 // TODO: 이미 구한 숫자라면 버리고 새숫자를 구해서 넣도록 한다.
+//			 lottoNumbers[i] = num;
+//		}
+//		
+//		// sort 메소드는 배열참조를 통해 힙메모리에 있는 배열객체를 대상으로 정렬작업을 진행하고 해당객체에 결과를 덮어 쓴다.
+//		Arrays.sort(lottoNumbers);
+//		
+//		System.out.println(Arrays.toString(lottoNumbers));
+//	
+//	}
+//
+//	private static void example() {
+//		// TODO Auto-generated method stub
+//
+//		// 45개의 정수값을 저장하기 위한 배열 생성.
+//		int[] ball = new int[45];
+//
+//		// 배열의 각 요소에 1~45의 값을 저장한다.
+//		for (int i = 0; i < ball.length; i++)
+//			ball[i] = i + 1; // ball[0]에 1이 저장된다.
+//
+//		int temp = 0; // 두 값을 바꾸는데 사용할 임시변수
+//		int j = 0; // 임의의 값을 얻어서 저장할 변수
+//
+//		// 배열의 i번째 요소와 임의의 요소에 저장된 값을 서로 바꿔서 값을 섞는다.
+//		// 0번째 부터 5번째 요소까지 모두 6개만 바꾼다.
+//		for (int i = 0; i < 6; i++) {
+//			j = (int) (Math.random() * 45); // 0~44범위의 임의의 값을 얻는다.
+//			temp = ball[i];
+//			ball[i] = ball[j];
+//			ball[j] = temp;
+//		}
+//
+//		// 배열 ball의 앞에서 부터 6개의 요소를 출력한다.
+//		for (int i = 0; i < 6; i++)
+//			System.out.printf("ball[%d]=%d%n", i, ball[i]);
+//	}
+//}
+
+
+////5-9
+//import java.util.*;  // Arrays.toString()을 사용하기 위해 추가
+//
+//class ArrayEx09 {
+//	public static void main(String[] args) {
+//		int[] code = { -4, -1, 3, 6, 11 };  // 불연속적인 값들로 구성된 배열
+//		int[] arr = new int[10];
+//
+//		for (int i=0; i < arr.length ; i++ ) {
+//			int tmp = (int)(Math.random() * code.length);
+//			arr[i] = code[tmp];
+//		}
+//
+//		System.out.println(Arrays.toString(arr));
+//	} // main의 끝
+//}
+
+
+////5-10
+//import java.util.Arrays;
+//
+//class ArrayEx10 {
+//	public static void main(String[] args) {
+////		example();
+//
+//		int[] nums = { 1, 4, 7, 3, 2 };
+//		System.out.println(Arrays.toString(nums));
+//		System.out.println("=====================");
+//
+//		// 배열이 갖고있는 점수를 오름차순 정렬하여 출력하시오.
+//
+//		for (int k = 0; k < nums.length - 1; k++) {
+//			for (int i = 0; i < nums.length - 1 - k; i++) {
+//				if (nums[i] > nums[i + 1]) {
+//					int temp = nums[i + 1];
+//					nums[i + 1] = nums[i];
+//					nums[i] = temp;
+//				}
+//			}
+//			System.out.println(Arrays.toString(nums));
+//		}
+//		
+////
+////		for (int i = 0; i < nums.length - 1 - 0; i++) {
+////			if (nums[i] > nums[i + 1]) {
+////				int temp = nums[i + 1];
+////				nums[i + 1] = nums[i];
+////				nums[i] = temp;
+////			}
+////		}
+////		System.out.println(Arrays.toString(nums));
+////		
+////		for (int i = 0; i < nums.length - 1 - 1; i++) {
+////			if (nums[i] > nums[i + 1]) {
+////				int temp = nums[i + 1];
+////				nums[i + 1] = nums[i];
+////				nums[i] = temp;
+////			}
+////		}
+////		System.out.println(Arrays.toString(nums));
+////		
+////		for (int i = 0; i < nums.length - 1 - 1; i++) {
+////			if (nums[i] > nums[i + 1]) {
+////				int temp = nums[i + 1];
+////				nums[i + 1] = nums[i];
+////				nums[i] = temp;
+////			}
+////		}
+////		System.out.println(Arrays.toString(nums));
+//
+//		System.out.println("배열이 갖고 있는 잡중에 가장 큰 숫자 : " + nums[nums.length - 1]);
+//		System.out.println("최종 결과 :" + Arrays.toString(nums));
+//
+//		// [1,,2,3,4,7]
+//
+//	}
+//
+//	private static void example() {
+//		// TODO Auto-generated method stub
+//		int[] numArr = new int[10];
+//
+//		for (int i = 0; i < numArr.length; i++) {
+//			// System.out.print(numArr[i] = (int)(Math.random() * 10));
+//			numArr[i] = (int) (Math.random() * 10);
+//		}
+//
+//		// System.out.println();
+//		System.out.println(Arrays.toString(numArr));
+//		System.out.println("==============================");
+//
+//		// 버블소트
+//		for (int i = 0; i < numArr.length - 1; i++) {
+//			// boolean changed = false; // 자리바꿈이 발생했는지를 체크한다.
+//
+//			for (int j = 0; j < numArr.length - 1 - i; j++) {
+//				if (numArr[j] > numArr[j + 1]) { // 옆의 값이 작으면 서로 바꾼다.
+//					int temp = numArr[j];
+//					numArr[j] = numArr[j + 1];
+//					numArr[j + 1] = temp;
+//					// changed = true; // 자리바꿈이 발생했으니 changed를 true로.
+//					System.out.println("\t" + Arrays.toString(numArr));
+//				}
+//
+//			} // end for j
+//
+////			if (!changed) break;	// 자리바꿈이 없으면 반복문을 벗어난다.
+////
+////			for(int k=0; k<numArr.length;k++)
+////				System.out.print(numArr[k]); // 정렬된 결과를 출력한다.
+////			System.out.println();
+//
+//			System.out.println("\t===========================");
+//			System.out.println("\t" + Arrays.toString(numArr));
+//
+//		} // end for i
+//
+//	} // main의 끝
+//}
+
+
+////5-11
+//import java.util.Arrays;
+//
+//class ArrayEx11 {
+//	public static void main(String[] args) {
+//		int[] numArr  = new int[10];
+//		int[] counter = new int[10]; // 배열은 객체고 객체의 멤버변수는 자료형 따라 자동으로 초기화 된다.
+//		
+//		System.out.println(Arrays.toString(counter));
+//
+//		for (int i=0; i < numArr.length ; i++ ) {
+//			numArr[i] = (int)(Math.random() * 10); // 0~9의 임의의 수를 배열에 저장
+//		//	System.out.print(numArr[i]);
+//		}
+//		System.out.println(Arrays.toString(numArr));
+//
+//		for (int i=0; i < numArr.length ; i++ ) {
+//			counter[numArr[i]]++;
+//		}
+//
+//		for (int i=0; i < numArr.length ; i++ ) {
+//			System.out.println( i +"의 개수 :"+ counter[i]);
+//		}
+//	} // main의 끝
+//}
+
+
+////5-18
+//import java.util.Arrays;
+//
+//class ArrayEx18 {
+//	public static void main(String[] args) {
+//
+//		int eng = 85;
+//		int[] nums = {80,90,70};
+//		int[][] scores = {{80,90,70},{60,50,40}};
+//		
+//		System.out.println(Arrays.toString(nums));
+//		nums = scores[0];
+//		System.out.println(Arrays.toString(nums));
+//		
+//		System.out.println(scores[0][0]);
+//		
+//		int [][] scores2 = {
+//				{80,90,70},
+//				{60,50,40}
+//		};
+//		
+//		System.out.println("===========================");
+//		
+//		int[][] score = {{ 100, 100, 100 }, { 20, 20, 20 }, { 30, 30, 30 }, { 40, 40, 40 } };
+//		int sum = 0;
+//
+//		System.out.println(score.length);
+//		System.out.println(score[0].length);
+//		
+//		for (int i = 0; i < score.length; i++) {
+//			for (int j = 0; j < score[i].length; j++) {
+//				System.out.printf("score[%d][%d]=%d%n", i, j, score[i][j]);
+//			}
+//		}
+//
+//		for (int[] tmp : score) {
+//			
+//			for (int i : tmp) {
+//				sum += i;
+//			}
+//		}
+//
+//		System.out.println("sum=" + sum);
+//	}
+//}
+
+
+////5-19
+//class ArrayEx19 {
+//	public static void main(String[] args) {
+//		 int[][] score = {
+//							{ 100, 100, 100}
+//							, { 20, 20, 20}
+//							, { 30, 30, 30}
+//							, { 40, 40, 40}
+//							, { 50, 50, 50}
+//						};
+//		// 과목별 총점
+//		int korTotal = 0;
+//		int engTotal = 0;
+//		int mathTotal = 0;
+//
+//	    System.out.println(" 번호   국어    영어    수학    총점    평균 ");
+//	    System.out.println("=============================");
+//
+//		for(int i=0;i < score.length;i++) {
+//			int   sum = 0;       // 개인별 총점
+//			float avg = 0.0f;   // 개인별 평균
+//
+//			korTotal  += score[i][0];
+//			engTotal  += score[i][1];
+//			mathTotal += score[i][2];
+//			System.out.printf("%3d", i+1);
+//
+//			for(int j=0;j < score[i].length;j++) {
+//				sum += score[i][j]; 
+//				System.out.printf("%5d", score[i][j]);
+//			}
+//
+//			avg = sum/(float)score[i].length;  // 평균계산
+//			System.out.printf("%5d %5.1f%n", sum, avg);
+//		}
+//
+//	    System.out.println("=============================");
+//	    System.out.printf("총점:%3d %4d %4d%n", korTotal, engTotal, mathTotal);
+//	}
+//}
+
+
+////5-21
+//import java.util.*;
+//
+//class MultiArrEx2 {
+//	public static void main(String[] args) {
+//		// example();
+//
+//		// 3x3 배열에 다음처럼 초기값을 할당하고 출력해서 증명하시오.
+//		// [1,2,3]
+//		// [4,5,6]
+//		// [7,8,9]
+//		int[][] num = new int[6][6];
+//		int k=0;
+//		int i,j;
+//		
+////		for (i = 0; i < 3; i++) {
+////			System.out.println();
+////			for (j = 0; j < 3; j++) {
+////				num[i][j] = i * 2 + (j + i + 1);
+////				System.out.print(num[i][j] + " ");
+////			}
+////
+////		}
+////		System.out.println("");
+////		System.out.println("==================");
+////	}
+////}
+//		// 3x3 배열에 다음처럼 초기값을 할당하고 출력해서 증명하시오.
+//		// [1,2,3]
+//		// [6,5,4]
+//		// [7,8,9]
+//	
+//		for (i = 0; i < 6; i++) {
+//			if (i % 2 == 1) {
+//				for (j = 5; j >= 0; j--) {
+//					k++;
+//					num[i][j] = k;
+//				}
+//
+//			} else {
+//				for (j = 0; j < 6; j++) {
+//					k++;
+//					num[i][j] = k;
+//				}
+//			}
+//		}
+//		for (i = 0; i < 6; i++) {
+//
+//			for (j = 0; j < 6; j++) {
+//
+//				System.out.printf("%d ", num[i][j]);
+//			}
+//			System.out.println();
+//		}
+//		System.out.println();
+//	}
+//}
+//		
+////		int n=3; //각 회전에서 수행할 수행횟수가 지정될 변수(5,4,3,2,1 로 변경됨)
+////        int sw=1; //(+1)행과 열의 증가 , (-1)행과 열의 감소
+////        int i=1,j=0;
+////        
+////        do{        
+////            for(int p=1;p<=3;p++){ // 시작은 1~5            
+////                k=k+1;
+////                j=j+sw; //행고정 열변화
+////                num[i][j] = k;                               
+////            }          
+////            n=n-1;
+////           
+////            if(n>0){               
+////                for(int p=1;p<=3;p++){             
+////                    k=k+1;
+////                    i=i+sw; //열고정 행변화
+////                    num[i][j] = k;                               
+////                }              
+////                sw = sw*(-1); // 스위칭             
+////            }else{             
+////                break; //반복문 빠져나감.
+////            }          
+////        }while(true);
+////        
+////        for (i = 0; i < 3; i++) {
+////        	for (j = 0; j < 3; j++) {
+////        		System.out.printf("%d ", num[i][j]);
+////        	}
+////        		System.out.println();
+////        }
+////        System.out.println();
+////	}
+////}
+//
+//
+////	private static void example() {
+////		// TODO Auto-generated method stub
+////		final int SIZE = 5;
+////		int x = 0 , y = 0;
+////		int num = 0;
+////
+////		int[][] bingo = new int[SIZE][SIZE];
+////		Scanner scanner = new Scanner(System.in);
+////
+////		// 배열의 모든 요소를 1부터 SIZE*SIZE까지의 숫자로 초기화
+////		for(int i=0;i<SIZE;i++) {
+////			for(int j=0;j<SIZE;j++) {
+////				
+////				bingo[i][j] = i*SIZE + j + 1;
+////			}
+////		}
+////		
+////		print(bingo);
+////		
+////		// 배열에 저장된 값을 뒤섞는다.(shuffle)
+////		for(int i=0;i<SIZE;i++) {
+////			for(int j=0;j<SIZE;j++) {
+////				x = (int)(Math.random() * SIZE);
+////				y = (int)(Math.random() * SIZE);
+////
+////				// bingo[i][j]와 임의로 선택된 값(bingo[x][y])을 바꾼다.
+////				int tmp =  bingo[i][j];
+////				bingo[i][j] = bingo[x][y];
+////				bingo[x][y] = tmp;
+////			}
+////		}
+////
+////		do {
+////			for(int i=0;i<SIZE;i++) {
+////				for(int j=0;j<SIZE;j++)
+////					System.out.printf("%2d ", bingo[i][j]);	
+////				System.out.println();
+////			}
+////			System.out.println();
+////		
+////			System.out.printf("1~%d의 숫자를 입력하세요.(종료:0)>", SIZE*SIZE);
+////			String tmp = scanner.nextLine(); // 화면에서 입력받은 내용을 tmp에 저장
+////			num = Integer.parseInt(tmp);     // 입력받은 문자열(tmp)를 숫자로 변환
+////
+////			// 입력받은 숫자와 같은 숫자가 저장된 요소를 찾아서 0을 저장
+////			outer:
+////			for(int i=0;i<SIZE;i++) {
+////				for(int j=0;j<SIZE;j++) {
+////					if(bingo[i][j]==num) {
+////						bingo[i][j] = 0;
+////						break outer; // 2중 반복문을 벗어난다.
+////					}
+////				}
+////			}
+////		} while(num!=0); 
+////	} // main의 끝
+////
+////	private static void print(int[][] bingo) {
+////		// TODO Auto-generated method stub
+////		for (int[] row : bingo) {
+////			
+////			System.out.println(Arrays.toString(row));
+////		}
+////	}
+////}
+
+////5-23
+//import java.util.*;
+//
+//class  MultiArrEx4{
+//	public static void main(String[] args) {
+//		String[][] words = {
+//			{"chair","의자"},			// words[0][0], words[0][1]
+//			{"computer","컴퓨터"},	// words[1][0], words[1][1]
+//			{"integer","정수"}		// words[2][0], words[2][1]
+//		};
+//
+//		Scanner scanner = new Scanner(System.in);
+//
+//		for(int i=0;i<words.length;i++) {
+//			System.out.printf("Q%d. %s의 뜻은?", i+1, words[i][0]);
+//
+//			String tmp = scanner.nextLine();
+//
+//			if(tmp.equals(words[i][1])) {
+//				System.out.printf("정답입니다.%n%n");
+//			} else {
+//			   System.out.printf("틀렸습니다. 정답은 %s입니다.%n%n",words[i][1]);
+//			}
+//		} // for
+//	} // main의 끝
+//}
+

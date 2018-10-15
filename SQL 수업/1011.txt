@@ -1,0 +1,249 @@
+2018/10/11
+
+SQL
+
+
+#1
+vs_SQL = 'select ename,job  from emp where deptno = :var';
+
+==> bind variable을 사용해서 Dynamic SQL로 처리한다. ==> 2가지 방법
+1. exucute...immediate SQL
+2. 7 step
+
+select ename,job  from emp where deptno = '20';
+select ename,job  from emp where deptno = '30';
+select ename,job  from emp where deptno = '40';
+select ename,job  from emp where deptno = '50';
+select ename,job  from emp where deptno = '60';
+select ename,job  from emp where deptno = '70';
+/
+
+=> https://docs.oracle.com/en/database/ : 최신문법 참고 
+
+
+#2
+
+select *
+from emp
+where hiredate > from and hiredate <= to;
+where hiredate >= from and hiredate < to;
+where hiredate > from and hiredate < to;
+
+where hiredate in (date1, date2, date3);
+where hiredate = date1 or hiredate = date2 or hiredate = date3;
+
+#3
+select * from emp where comm = null; 로 하게 되면 안나옴
+아래의 방법으로 써야 한다.
+select * from emp where comm is null;
+select * from emp where comm is not null;
+
+#4
+select * from emp where ename like '윤%' ;  -- 시작이 윤.. 
+ex) select * from emp where ename like 'S%';
+select * from emp where ename like '%호';   -- 종료가 호..
+select * from emp where ename like '%성%'; -- 성자가 들어간거 전부..
+select * from emp where ename like 'S__T%'; -- 첫번째가 S 네번째가 T인 경우 
+
+추가 
+insert into emp (empno, ename, sal) values (777,'J_SARA',700);
+insert into emp (empno, ename, sal) values (888,'J_PAGE',800);
+
+-> select * from emp where ename like 'J_%';
+-> ed
+    -> 1* select * from emp where ename like 'J$_%' escape '$' / 로 수정
+-> /
+
+
+#5
+select * from emp where 
+
+sal > any (500,600,700);
+sal > 500 or sal > 600or sal > 700;
+sal > 500;
+
+sal = any (500,600,700);
+sal = 500 or sal = 600or sal = 700;
+sal in (500,600,700);
+
+sal > all (500,600,700);
+sal > 500 or sal > 600or sal > 700;
+sal > 700;
+
+
+
+#6
+
+select name, addr from customer1 union select name, addr from customer2;
+select name, addr from customer1 union all select name, addr from customer2;
+select name, addr from customer1 intersect select name, addr from customer2;
+select name, addr from customer1 minus select name, addr from customer2;
+
+select name as "이름1", addr as "주소1" from customer1 minus 
+select name as "이름2", addr as "주소2" from customer2;
+
+
+#7 
+
+의사컬럼 , 가상 컴럼, pseudo column
+fowid, rownum
+
+select --3 (컬럼이 선택완료)
+from --1
+where --2
+order by --4
+
+3이 되면서 select에 건 by건으로 가져오면서 rownum이 1,2,3,4를 부여한다.
+
+1.select * from emp where rownum = 1;
+2.select * from emp where rownum = 2; x 1이없으면 2,3,4.... 가 생기지 않음
+3.select * from emp where rownum = 3; x
+
+4.select * from emp where rownum > 2; x
+5.select * from emp where rownum >= 2; x
+6.select * from emp where rownum < 2;
+7.select * from emp where rownum <= 2;
+
+
+select  rownum, a.* from emp a;
+select  rownum, a.* from emp a where rownum = 1; // 별칭을 주면 똑같이 별칭을 줘야함 a 
+
+select rownum, a.* from (select * from emp order by sal desc) a;
+select rownum, a.* from (select * from emp order by sal desc) a where rownum <= 10;
+
+
+#8
+
+null은 타입(number, varchar2, data)이 없다.
+
+union, intersect, minus : 쪽수 맞추기에 활용
+
+(emp.sal * 12) + comm = null
+의 뭐든지에 0을 곱하면 0이 되는것처럼 null이 연산에 참여되면 null이 된다.
+
+
+select from where comm = null; 하면 안됌
+
+select from where comm is null, select from where is not null 로 써야함
+where nvl(comm,0) != 0 
+
+nvl,nvl2,nullif,coalesc
+
+
+#9
+
+select * from nls_session_parameters;
+nls_date_format = rr/mm/dd
+
+alter session set nls_date_format = 'mm.dd.yyyy';
+
+insert into datest values ("12-31-2016"); => mm-dd-yyyy
+
+
+#10
+
+create tabel chartest(
+	col1 char(3)
+	col2 char(5)	
+	);
+
+select * from chartest where col1 = col2;
+
+=> 작은거 col1를 col2에 맞춰서 늘인후에 비교한다.
+=> 테이블 구조에서 변경 or 작업을 한다면 commit; 을 해야함 
+
+
+#11
+
+date
+
+datetime 
+
+2018/10/01-(10/02)
+
+2-1 = 1 + 1
+
+
+#12
+
+dictionary ==> 접두어가 ...DBA, ALL, USER의 3가지가 존재한다.
+
+DBA_ ==> SYS, SYSTEM이 만들어 놓은 objcet
+
+ALL_ ==> 다른사용자, 예를 들어 TEST1이 만들어서 TEST2에게 권한을 준것
+
+USER_ ==> 내가 만든 오브젝트... 오라클은 기본적으로 만든사람이 모든 권한을 갖는다
+
+dual 이라는 dummy table sys가 만들어서 synonym 만든후에
+public(누구나 전부 사용가능)으로 배포한 프로젝트이다.
+
+
+
+
+desc emp xxxxxxxxxxxx
+
+select * from emp; ==> ????
+
+
+select deptno, sum(sal) from emp group by deptno order by deptno;
+
+select deptno, avg(sal) from emp group by rollup(deptno) order by deptno;
+
+select deptno, avg(sal),grouping(deptno)g_deptno from emp group by rollup(deptno) order by deptno;
+
+select deptno, count(*), sum(sal), max(sal), min(sal) from emp group by deptno;
+
+select deptno, sum(sal), grouping(deptno) from emp group by rollup(deptno);
+
+select deptno,job,sum(sal), grouping(deptno), grouping(job) from emp  group by rollup(deptno,job) order by 1,2;
+
+select deptno, job,sum(sal),grouping(deptno) g_deptno, grouping(job) g_job from emp group by rollup(deptno,job);
+
+select deptno, job,sum(sal),grouping(deptno) g_deptno, grouping(job) g_job from emp group by cube(deptno,job);
+
+
+#13
+
+select  sysdate - to_date('2018/10/01') from dual;
+
+select  sysdate - to_date('2018/10/01 00:00:00','YYYY/MM/DD HH24:MI:SS') from dual;
+
+select to_date('2018/10/11') - to_date('2018/10/01') from dual;
+
+-> 시간이 포함된 개념인지 아닌지 여부에 따라 다르다.
+
+
+
+#14
+
+nvl(sal,0) + nvl(comm,0)
+
+decode 써서 emp의 sal을 읽는데 sal이 1500보다 큰 것은 HIGH를 찍어주고
+sal이 1500이면 ZERO를 찍어주고, sal이 1500보다 작은 것은 LOW를 찍어주세요.
+
+
+select empno,ename ,sal , decode(sign(sal -1500),-1,'HIGH',0,'ZERO',1,'LOW') from emp;
+
+sign(sal -1500) ==> 1,0,-1
+
+select empno,ename,(case
+	when sal >=5000 then 'HIGH SAL'
+	when sal	>=3000 and sal < 5000 then 'MIDDLE SAL'
+	when sal	>=1000 and sal < 3000 then 'AVERAGE SAL'
+	when sal < 1000 then 'LOW SAL' end) as sal_category
+	from emp;
+
+decode를 써서 위의 쿼리를 구현하세요.
+
+greatest(1,2,3,4,5)
+최고 큰값 최고 작은값 리턴 함수
+
+abstract
+interface
+	
+
+
+
+
+
+

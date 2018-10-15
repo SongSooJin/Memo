@@ -1,0 +1,811 @@
+2018/08/22
+
+자바수업_코드
+
+////8-1
+//class ExceptionEx01 {
+//	public static void main(String[] args) {
+//		
+//		// 논리적 에러 
+//		// int x = 3/0;
+//		// int y = 2;
+//		// System.out.println( y == 1 || 3/0 > 0);
+//		
+//		
+//		try  {
+//			try	{	} catch (Exception e)	{ }
+//		} catch (Exception e)	{
+//		//try	{	} catch (Exception e) { }	// 에러. 변수 e가 중복 선언되었다.
+//		} // try-catch의 끝
+//
+//		try  {
+//
+//		} catch (Exception e)	{
+//
+//		} // try-catch의 끝
+//	}	// main메서드의 끝
+//}
+
+
+////8-2
+//class ExceptionEx02 {
+//	public static void main(String args[]) {
+//		int number = 100;
+//		int result = 0;
+//
+//		for(int i=0; i < 10; i++) {
+//			result = number / (int)(Math.random() * 10); // 7번째 라인
+//			System.out.println(result);
+//		}
+//	} // main의 끝
+//}
+
+
+////8-3
+//class ExceptionEx03 {
+//	public static void main(String args[]) {
+//		int number = 100;
+//		int result = 0;
+//
+//		for(int i=0; i < 10; i++) {
+//			try {                                  // 0-9까지 , 만약 0이걸리면 에러 
+//				result = number / (int)(Math.random() * 10);
+//				System.out.println(result);
+//				} 
+//			catch (ArithmeticException e)	{
+//				System.out.println("0");	
+//			} // try-catch의 끝
+//		} // for의 끝
+//	
+//	} 
+//}
+
+
+////8-4
+//class ExceptionEx04 {
+//	public static void main(String args[]) {
+//			System.out.println(1);			
+//			System.out.println(2);
+//			try {
+//				System.out.println(3);
+//				System.out.println(4);
+//				
+//				//throw new ArithmeticException();
+//				throw new RuntimeException();
+//				} // 예외가 발생해야 catch문이 돌아감 
+//			catch (IndexOutOfBoundsException e)	{ 
+//				// try부분에서 발생한 예외 instanceof(상속관계) Exception이 true 일때
+//				// Exception e = try 부분에서 발생한 예외 할당하고 catch 블록안에
+//				// 코드를 수행한다.
+//				System.out.println("5-1");
+//				} // try-catch의 끝
+//			catch (ArithmeticException e)	{ 
+//				System.out.println("5-2");
+//			}
+//			catch (Exception e)	{ 
+//				System.out.println("5-3");
+//			}// 예외클래스 상속트리에서 부모클래스를 하단에 배치해야 한다.
+//	
+//			System.out.println(6);
+//	}	// main메서드의 끝
+//}
+
+
+////8-5
+//class ExceptionEx05 {
+//	public static void main(String args[]) {
+//			System.out.println(1);			
+//			System.out.println(2);
+//			try {
+//				System.out.println(3);
+//				System.out.println(0/0);	
+//				System.out.println(4); 	// 실행되지 않는다.
+//			} catch (ArithmeticException ae)	{
+//				System.out.println(5);
+//			}	// try-catch의 끝
+//			System.out.println(6);
+//	}	// main메서드의 끝
+//}
+
+
+////8-6
+//class ExceptionEx06 {
+//	public static void main(String args[]) {
+//		System.out.println(1);			
+//		System.out.println(2);
+//		try {
+//			System.out.println(3);
+//			System.out.println(0/0);
+//			System.out.println(4); 	// 실행되지 않는다.
+//		} catch (Exception e)	{	// ArithmeticException대신 Exception을 사용.
+//			System.out.println(5);
+//		}	// try-catch의 끝
+//		System.out.println(6);
+//	}	// main메서드의 끝
+//}
+
+
+////8-7
+//class ExceptionEx07 {
+//	public static void main(String args[]) {
+//		System.out.println(1);			
+//		System.out.println(2);
+//		try {
+//			System.out.println(3);
+//			System.out.println(0/0);
+//			System.out.println(4); 		// 실행되지 않는다.
+//		} catch (ArithmeticException ae)	{
+//			if (ae instanceof ArithmeticException) 
+//				System.out.println("true");	
+//			System.out.println("ArithmeticException");
+//		} catch (Exception e)	{
+//			System.out.println("Exception");
+//		}	// try-catch의 끝
+//		System.out.println(6);
+//	}	// main메서드의 끝
+//}
+
+
+////8-8
+//class ExceptionEx08 {
+//	public static void main(String args[]) {
+//		System.out.println(1);			
+//		System.out.println(2);
+//		try {
+//			System.out.println(3);
+//			System.out.println(0/0); // 예외발생!!!
+//			System.out.println(4); 	 // 실행되지 않는다.
+//		} catch (ArithmeticException ae)	{
+//			ae.printStackTrace();
+//			System.out.println("예외메시지 : " + ae.getMessage());
+//		}	// try-catch의 끝
+//		System.out.println(6);
+//	}	// main메서드의 끝
+//}
+
+
+////8-9
+//class ExceptionEx09 {
+//	public static void main(String args[]) {
+//		try {
+//			divide(3,0);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//		//	e.printStackTrace();
+//		}
+//		
+//	}
+//	private static void divide ( int i, int j) throws Exception {
+//		try {
+//			int result = i / j ;
+//			System.out.println("result = " + result);
+//		}
+//		//	Exception e = new Exception("고의로 발생시켰음.");
+//		//	throw e;	 // 예외를 발생시킴
+//		//  throw new Exception("고의로 발생시켰음.");  
+//
+//		catch (Exception e)	{
+//		//	System.out.println("예외가 발생.");
+//
+//		//	System.out.println("에러 메시지 : " + e.getMessage());
+//		//    e.printStackTrace();
+//			
+//			// 메소드 개발자가 직접 예외 처리하지 않고
+//			// 메소드를 이용하는 측에서 예외처리를 하게 하고 싶다.
+//			// RuntimeException ex = new RuntimeException("고의로 발생시켰음.");
+//			// 언체크드 계열의 예외인 RuntimeException을 사용하면
+//			// 이용하는 측 개발자가 try ~ catch 적용여부를 강제당하지 않는다.
+//			// 그래서 RuntimeException 클래스와 그 자식 클래스들은 언체크드계열의
+//			// 예외라고 부른다.
+//			
+//			
+//			Exception ex = new RuntimeException("고의로 발생시켰음.");
+//			// 체크드 계열의 예외인 Exception 을 사용하면
+//			// 이용하는 측 개발자가 try ~ catch를 반드시 적용해야 한다.
+//			throw ex; // 예외를 발생시킴
+//			
+//			
+//			
+//		}
+//		System.out.println("프로그램이 정상 종료되었음.");
+//
+//	}
+//}
+//
+
+
+////8-10
+//class ExceptionEx10 {
+//	public static void main(String[] args) throws Exception {
+//		throw new Exception("예외 정보");		
+//		// Exception을 고의로 발생시킨다.
+//	}
+//}
+
+
+////8-11
+//class ExceptionEx11 {
+//	public static void main(String[] args) {
+//		throw new RuntimeException();	// RuntimeException을 고의로 발생시킨다.
+//	}
+//}
+
+
+////8-12
+//class ExceptionEx12 {
+//	public static void main(String[] args) throws Exception {
+//		try {
+//			method1();	 // 같은 클래스내의 static멤버이므로 객체생성없이 직접 호출가능.
+//			}
+//		catch ( Exception e) {
+//			// e.printStackTrace();
+//			System.out.println(e.getMessage());
+//			}
+//		}	// main메서드의 끝
+//
+//	static void method1() throws Exception {
+//		method2();
+//	}	// method1의 끝
+//
+//	static void method2() throws Exception {
+//		throw new Exception("예외 발생");
+//	}	// method2의 끝
+//}
+
+
+////8-13
+//class ExceptionEx13 {
+//	public static void main(String[] args) {
+//		method1(); 	  // 같은 클래스내의 static멤버이므로 객체생성없이 직접 호출가능.
+//  	}	// main메서드의 끝
+//
+//	static void method1() {
+//		try {
+//		     throw new Exception("예외 발생");
+//		} catch (Exception e) {
+//			System.out.println("method1메서드에서 예외가 처리되었습니다.");
+//			e.printStackTrace();
+//		}
+//	}	// method1의 끝
+//}
+
+
+////8-14
+//class ExceptionEx14 {
+//	public static void main(String[] args) {
+//		try  {
+//				method1();		
+//		} catch (Exception e)	{
+//				System.out.println("main메서드에서 예외가 처리되었습니다.");
+//				e.printStackTrace();
+//		}
+//	}	// main메서드의 끝
+//
+//	static void method1() throws Exception {
+//		throw new Exception("예외 발생");
+//	}	// method1()의 끝
+//} // class의 끝
+
+
+////8-15
+//import java.io.*;
+//
+//class ExceptionEx15 {
+//	public static void main(String[] args) {
+//		args = new String[] {null} ;
+//		
+//			  // command line에서 입력받은 값을 이름으로 갖는 파일을 생성한다.
+//			File f = createFile(args[0]);	
+//			System.out.println( f.getName() + " 파일이 성공적으로 생성되었습니다.");
+//      
+//	} // main메서드의 끝
+//
+//	@SuppressWarnings("finally")
+//	static File createFile(String fileName) {
+//		try {
+//			if (fileName==null || fileName.equals(""))
+//				throw new Exception("파일이름이 유효하지 않습니다.");
+//		} catch (Exception e) {
+//             // fileName이 부적절한 경우, 파일 이름을 '제목없음.txt'로 한다.
+//			fileName = "제목없음.txt";	 
+//			
+//			// catch  블록 내 코드 : 해당 예외가 발생할 때만 작동한다.
+//		} finally {
+//			// finally 블록 내 코드 : try 블록내 코드를 수행한 후,
+//			// catch 블록 내 코드 기동여부와 상관없이 언제나 최종적으로 작동하는 코드를 배치하는 공간이다.
+//			File f = new File(fileName); // File클래스의 객체를 만든다.
+//			createNewFile(f);		     // 생성된 객체를 이용해서 파일을 생성한다.
+//			return f;
+//		}
+//	}	// createFile메서드의 끝
+//
+//	static void createNewFile(File f) {
+//		try {
+//			f.createNewFile();		// 프로젝트 폴더 밑에 파일을 생성한다.
+//		} catch(Exception e){ }
+//	}	// createNewFile메서드의 끝
+//} 
+
+
+////8-22
+//class NewExceptionTest {
+//	public static void main(String args[]) {
+//		try {
+//			startInstall();		// 프로그램 설치에 필요한 준비를 한다.
+//			copyFiles();			// 파일들을 복사한다. 
+//		} catch (SpaceException e)	{
+//			System.out.println("에러 메시지 : " + e.getMessage());
+//			e.printStackTrace();
+//			System.out.println("공간을 확보한 후에 다시 설치하시기 바랍니다.");
+//		} catch (MemoryException me)	{
+//			System.out.println("에러 메시지 : " + me.getMessage());
+//			me.printStackTrace();
+//			System.gc();		//  Garbage Collection을 수행하여 메모리를 늘려준다.
+//			System.out.println("다시 설치를 시도하세요.");
+//		} finally {
+//			deleteTempFiles();	// 프로그램 설치에 사용된 임시파일들을 삭제한다.
+//		} // try의 끝
+//	} // main의 끝
+//
+//   static void startInstall() throws SpaceException, MemoryException { 
+//		if(!enoughSpace()) 		// 충분한 설치 공간이 없으면...
+//			throw new SpaceException("설치할 공간이 부족합니다."); // ==> startInstall(); 로 간다.
+//		if (!enoughMemory())		// 충분한 메모리가 없으면...
+//			throw new MemoryException("메모리가 부족합니다.");
+//   } // startInstall메서드의 끝
+//
+//   static void copyFiles() { /* 파일들을 복사하는 코드를 적는다. */ }
+//   static void deleteTempFiles() { /* 임시파일들을 삭제하는 코드를 적는다.*/}
+//   
+//   static boolean enoughSpace()   {
+//		// 설치하는데 필요한 공간이 있는지 확인하는 코드를 적는다.
+//		return false;
+//   }
+//   static boolean enoughMemory() {
+//		// 설치하는데 필요한 메모리공간이 있는지 확인하는 코드를 적는다.
+//		return true;
+//   }
+//} // ExceptionTest클래스의 끝
+//
+///*
+// * 사용자 정의 예외 클래스 만들기
+// * class 클래스명 extends Exception :  체크드 예외를 만들고자 할 때
+// * 
+// * class 클래스명 extends RuntimeException : 언체크드 예외를 만들고자 할 때
+// * 
+// * class 클래스명 extends ArithmeticException  : 이미 잘 만들어진
+// * 예외를 약간의 기능 변경 및 기능 확장으로 사용하고자 할 때
+// * 
+// * */
+//@SuppressWarnings("serial")
+//class SpaceException extends Exception {
+//	// String msg;
+//	SpaceException(String msg) {
+//	   // this.msg = msg;
+//		super(msg);	
+//	   
+//   }
+//} 
+//
+//@SuppressWarnings("serial")
+//class MemoryException extends Exception {
+//		// 예외를 나타내는 클래스명을 바꾸고 싶을 때 많이 커스텀 예외 클래스를 만든다. 
+//	MemoryException(String msg) {
+//	   super(msg);	
+//   }
+//}
+
+
+////9-1
+//
+//class EqualsEx1 {
+//	public static void main(String[] args) {
+//		Value v1 = new Value(10);
+//		Value v2 = new Value(10);		
+//		/*
+//		 * 설계도 value가 equals 메소드를 재정의 하지 않았다면 :
+//		 * v1.equals(v2) <===> v1 == v2
+//		 * 
+//		 * 설계도 value가 equals 메소드를 재정의 해서 객체의 멤버변수가 같은지 
+//		 * 비교하고 있다면 :
+//		 * v1.equals(v2) <===> v1.value == v2.value
+//		 * */
+//		
+//									// .equals는 부모(super)클래스의 Object , Object는 결국 비교연산자 
+//		System.out.println(v1.equals(v2) ? "같다" : "다르다");
+//		System.out.println(v1 == v2 ? "같다" : "다르다");
+//		
+//		String x1 ="홍길동";	// new String("홍길동");
+//		String x2 ="홍길동";	// 이미 만들어진 객체를 참조한다.
+//		String x3 = new String ("홍길동");
+//		
+//		
+//		/*
+//		 * 슈퍼 클래스 Object의 equals 메소드를 그대로 사용한다면
+//		 * 결과는 비교연산자 == 와 같다.
+//		 * */
+//		
+//		if (v1.equals(v2)) {
+//			System.out.println("v1과 v2는 같습니다.");
+//		} else {
+//			System.out.println("v1과 v2는 다릅니다.");		
+//		}
+//
+//		v2 = v1;
+//
+//		if (v1.equals(v2)) {
+//			System.out.println("v1과 v2는 같습니다.");
+//		} else {
+//			System.out.println("v1과 v2는 다릅니다.");		
+//		}
+//	} // main
+//} 
+//
+//class Value extends java.lang.Object{
+//	int value;
+//
+//	Value(int value) {
+//		this.value = value;
+//	}
+//
+//	//String 클래스는 이미 재정의 되어있다.
+//	// 코드를 자동으로 제너레이트 할 수 있다는 의미 : 
+//	// 누가 짜도 똑같기 때문에 굳이 개발자가 타이핑 할 필요없이 자동으로 만들어도 된다는 뜻 
+//	@Override // .equals는 value의 Object , Object의 재정의 
+//	public boolean equals(Object obj) {
+//		// 이 객체와 파라미터로 받은 obj가 가리키는 객체가 같은가? 
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		
+//		// 객체의 상태정보를 비교한다. 설계도가 같은가? 
+//		if (this.getClass() != obj.getClass())
+//			return false;
+//		
+//		Value other = (Value) obj;
+//		
+//		
+//		if (this.value != other.value)
+//			return false;
+//
+//		return true;
+//	}
+//
+//
+//}
+
+
+////9-2
+//class Person {
+//	long id;
+//
+//	public boolean equals(Object obj) {
+//		if(obj!=null && obj instanceof Person) {
+//			return id ==((Person)obj).id;
+//		} else {
+//			return false;
+//		}
+//	}
+//
+//	Person(long id) {
+//		this.id = id;
+//	}
+//}
+//
+//class EqualsEx2 {
+//	public static void main(String[] args) {
+//		Person p1 = new Person(8011081111222L);
+//		Person p2 = new Person(8011081111222L);
+//
+//		if(p1==p2)		// 같은 메모리를 차지하고 있는가?
+//			System.out.println("p1과 p2는 같은 사람입니다.");
+//		else
+//			System.out.println("p1과 p2는 다른 사람입니다.");
+//
+//		if(p1.equals(p2))		// 메모리는 달라도 보관하는 값이 같은가?
+//			System.out.println("p1과 p2는 같은 사람입니다.");
+//		else
+//			System.out.println("p1과 p2는 다른 사람입니다.");
+//	
+//	}
+//}
+
+
+////9-4
+//class Card extends Object {
+//	String kind;
+//	int number;
+//
+//	Card() {
+//		this("SPADE", 1);
+//	}
+//
+//	Card(String kind, int number) {
+//		this.kind = kind;
+//		this.number = number;
+//	}
+//	
+//// 해당객채의 구분값 = 해쉬코드
+//
+//	@Override
+//	public String toString() {
+//		return "Card [kind=" + kind + ", number=" + number + "]";
+//	}
+//	
+//	/*
+// * 슈퍼클래스의 toString() 메소드를 그대로 사용하면
+// * Card@7852e922 형태의 문자열을 리턴한다.
+// * 
+// * toString()  메소드를 재정의해서 객체가 가진 멤버변수의 값을 
+// * 출력하는 용도로 바꾸어 사용할 수 있다.
+// * Card [kind=SPADE, number = 1]
+// * */
+//
+//	public static void main(String[] args) {
+//		Card c1 = new Card();
+//		Card c2 = new Card();
+//		
+//		System.out.println(c1.kind + "," + c1.number);
+//		System.out.println(c2.kind + "," + c2.number);
+//		
+//		System.out.println(c1);
+//		// System.out.println(c1.toString());
+//		
+//		System.out.println(c2);
+//		// System.out.println(c2.toString());
+//	}
+//
+//	
+//}
+
+
+////9-7
+//// Cloneable : Maker Interface, 객체에 형광펜을 칠해서 객체와 다른 객체를 구분한다.
+//
+//class Point implements Cloneable {
+//	int x;
+//	int y;
+//
+//	Point(int x, int y) {
+//		this.x = x;
+//		this.y = y;
+//	}
+//
+//	@Override 
+//	public String toString() {
+//		return "x="+x +", y="+y;
+//	}
+//
+//	public Object clone() {
+//		Object obj = null;
+//		try {
+//			obj = super.clone();  // clone()은 반드시 예외처리를 해주어야 한다. / Object의 Clone()
+//		} catch(CloneNotSupportedException e) {}
+//		return obj;
+//	}
+//}
+//
+//class CloneEx1 {
+//	public static void main(String[] args){
+//		Point original = new Point(3, 5);
+//		System.out.println(original + "\n");
+//		
+//		Point copy = (Point)original.clone(); // 복제(clone)해서 새로운 객체를 생성
+//		System.out.println(copy + "\n" );
+//		
+//		System.out.println(original == copy); // false
+//		
+//		Point original2 = original; 		// 얕은복사
+//		System.out.println(original2 == original); // true
+//		
+//		// 새(new) 객체를 만들고 원본 객체의 멤버변수들의 값을 새 객체에 멤버변수에 복사해 넣는다.
+//		Point original3 = (Point) original.clone();		// 깊은복사 
+//		System.out.println(original3 == original); // false
+//		
+//		
+//	}
+//}
+
+
+////9-10
+//final class Card3 {
+//	String kind;
+//	int num;
+//
+//	Card3() {
+//		this("SPADE", 1);
+//	}
+//
+//	Card3(String kind, int num) {
+//		this.kind = kind;
+//		this.num  = num;
+//	}
+//
+//	public String toString() {
+//		return kind + ":" + num;
+//	}
+//}
+//
+//class ClassEx1 {
+//	public static void main(String[] args) throws Exception {
+//		Card3 c  = new Card3("HEART", 3);       // new연산자로 객체 생성
+//						// c. = Card3 / getClass = Object
+//		Class<? extends Card3> cObj = c.getClass();
+//		/*
+//		 * Class<? extends Card3> java.lang.Object.getClass()
+//		 * Class<취급하는 자료형>
+//		 * Class 설계도로 만든 객체인데 이 객체는 Card3.class 와 관련된 모든 정보를 취급하거나 또는  
+//		 * 그 자식(extends) 객체들 중에 하나(?)일 수도 있다.
+//		 * */
+//		
+//		Card3 c2 = Card3.class.newInstance();   
+//		// Class객체를 통해서 객체 생성
+//		// Card3 c2  = new Card3();
+//
+//		System.out.println(c);
+//		System.out.println(c2);
+//		System.out.println(cObj.getName());
+//		System.out.println(cObj.toGenericString());
+//		System.out.println(cObj.toString());		
+//	}
+//}
+
+
+////9-11
+//class StringEx1 {
+//	public static void main(String[] args) {
+//		String str1 = "abc";
+//		String str2 = "abc";
+//
+//		System.out.println("String str1 = \"abc\";");
+//		System.out.println("String str2 = \"abc\";");
+//
+//		System.out.println("str1 == str2 ?  " + (str1 == str2));
+//		// String 클래스의 equals 메소드는 보관하는 문자열을 비교하는 것으로 재정의 되어 있다.
+//
+//		System.out.println("str1.equals(str2) ? " + str1.equals(str2));
+//		System.out.println();
+//
+//		// 문자열을 다른 연동 프로그램으로 부터 받아 쓰는 경우에 해당한다.
+//		String str3 = new String("\"abc\""); 	// from : 서블릿 프레임워크
+//		String str4 = new String("\"abc\""); 	// from : JDBC 라이브러리 
+//
+//		System.out.println("String str3 = new String(\"abc\");");
+//		System.out.println("String str4 = new String(\"abc\");");
+//
+//		System.out.println("str3 == str4 ? " + (str3 == str4));
+//		// 문자열 비교는 equals 메소드를 사용한다.
+//		System.out.println("str3.equals(str4) ? " + str3.equals(str4));
+//	}
+//}
+
+
+////9-12
+//class StringEx2 {
+//	public static void main(String args[]) {
+//		String s1 = "AAA";
+//		String s2 = "AAA";
+//		String s3 = "AAA";
+//		String s4 = "BBB";
+//		// ==> 객체는 2개 만들어짐 
+//		
+//		System.out.println(s1 == s2 && s2 == s3);
+//	}
+//}
+
+
+////9-14
+//import java.util.Arrays;
+//import java.util.StringJoiner;
+//
+//class StringEx4 {
+//	public static void main(String[] args) {
+//		String animals = "dog,cat,bear";
+//		
+//		String[] arr   = animals.split(",");
+//		System.out.println(Arrays.toString(arr));
+//		
+//		System.out.println(String.join("-", arr));
+//		System.out.println(String.join("-", "가" , "나" , "다" , "라"));
+//		/*
+//		 * String java.lang.String.join(CharSequence delimiter, CharSequence... elements)
+//		 * 	스트링은 CharSequence 인터페이스 구현체 이므로 CharSequence를 달라고 할때
+//		 * 대신 스트링 객체를 줄 수 있다.
+//		 *	
+//		 * */
+//		StringJoiner sj = new StringJoiner("/","[","]");
+//		for(String s : arr)
+//			sj.add(s);
+//
+//		System.out.println(sj.toString());
+//	}
+//}
+
+
+////9-15
+//import java.util.StringJoiner;
+//
+//class StringEx5 {
+//	public static void main(String[] args) throws Exception {
+//		String str = "가";
+//
+//		byte[] bArr  = str.getBytes("UTF-8");
+//		byte[] bArr2 = str.getBytes("CP949");
+//
+//		System.out.println("UTF-8:" + joinByteArr(bArr));
+//		System.out.println("CP949:" + joinByteArr(bArr2));
+//
+//		System.out.println("UTF-8:" + new String(bArr,  "UTF-8"));
+//		System.out.println("CP949:" + new String(bArr2, "CP949"));
+//	}
+//
+//	static String joinByteArr(byte[] bArr) {
+//		 StringJoiner sj = new StringJoiner(":", "[", "]");
+//
+//		for(byte b : bArr)
+//			sj.add(String.format("%02X",b));
+//
+//		return sj.toString();
+//	}
+//}
+
+
+////9-18
+//class StringBufferEx1 {
+//	public static void main(String[] args) {
+//		veryBad();
+//
+//		thisIsGood();
+//		/*
+//		 * 문자열을 반복적으로 조작해야 하는 경우 StringBuffer 객체를 사용하면 메모리를 아낄 수 있다.
+//		 */
+//
+//		StringBuffer sb = new StringBuffer("abc");
+//		StringBuffer sb2 = new StringBuffer("abc");
+//
+//		System.out.println("sb == sb2 ? " + (sb == sb2));
+//		// StringBuffer 클래스의 equals 메소드는 비교연산자와 똑같이 작동한다.
+//		System.out.println("sb.equals(sb2) ? " + sb.equals(sb2));
+//
+//		// StringBuffer가 보관하는 문자열을(내용) String으로 변환한다.
+//		String s = sb.toString(); // String s = new String(sb);와 같다.
+//		String s2 = sb2.toString();
+//
+//		System.out.println("s.equals(s2) ? " + s.equals(s2));
+//	}
+//
+//	private static void thisIsGood() {
+//		
+//			StringBuffer sb = new StringBuffer();
+//			
+//			for (int i = 0; i < 100; i++) {
+//				sb.append(i); // new X 100번
+//			}
+//			System.out.println(sb.toString());
+//		}
+//			
+//	private static void veryBad() {
+//		/*
+//		 * 문자열을 보관하는 객체의 생성여부는 개발자가 결정하지 않는다. String 객체는 immutable(값이 한번 할당되면 변경할 수
+//		 * 없다)이다.
+//		 */
+//			String txt = ""; // new
+//	
+//			for (int i = 0; i < 100; i++) {
+//				txt = txt + i; // new X 100번
+//				/*
+//				 * txt        txt + i; 
+//				 * ""          "" +0 
+//				 * ''01''      "0"+1
+//				 * "012"    "01"+2 ...
+//				 */
+//			}
+//			System.out.println(txt);
+//
+//	}
+//}
+
+
+
+

@@ -1,0 +1,33 @@
+2018/10/05
+
+p33
+
+마지막 세션이 보내면 30분 이후 파괴
+=> 다시 로그인 
+
+특정 세션만 시간을 늘릴수 잇음
+
+2-로그인jsp
+
+
+작업순서
+1. 연동할 DB 정보 확인
+ Table >> Column..
+
+2. 데이터를 묶어서 취급하는 클래스 
+Emp
+
+3. 디비와 대화하는 클래스
+EmpDao 인터페이스 
+EmpDaolmpl 구현클래스 
+
+4. 브라우저와 대화하는 서블릿 클래스 
+EmpServlet
+
+5. 데이터를 사용하여 화면을 구성
+emp-list.jsp
+
+6. 결과확인
+http://localhost:8080/3-jdbc/
+http://localhost:8080/3-jdbc/emps
+

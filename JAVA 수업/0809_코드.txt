@@ -1,0 +1,839 @@
+2018/08/09
+
+자바수업_ 코드
+
+public class HelloWorld {
+	
+////0-1	// 클래스가 직접 갖고있는 멤버변수의 메모리 로드 시점은
+//	// 클래스가 인스턴스 화 되어 객체가 될때 같이 메모리에 로드된다.
+//	static String title = "Hello World";
+//	
+//	//static이 붙어있으면 메모리가 자동 처리,프로그램 시작전에 
+//	// 메소드가 실행되기 위해서는 메소드가 소프트웨어 코드로 작동하기 위해서 미리 메모리에 로드되어야 한다.
+//	// static : 키워드가 붙어 있는 변수, 메소드를 프로그램 시작전 (기동메소드 전) 자동으로 메모리에 로드하여 
+//	// 실행될 수있도록 준비한다. 
+//	// 같은 클래스의 다수의 변수와 다수의 메소드가 있을 때 static키워드가 붙어 있는 변수, 메소드만 단독으로 메모리에 로드된다.
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		
+//		// Cannot make a static reference to the non-static field title
+//		// main 메소드는 static 키워드를 붙여서 메모리에 할당되고 사용할수 있으나
+//		// main 메소드 내에서 사용하려는 title 변수는 static 키워드가 붙어 있지 않으므로
+//		// 메모리에 할당되어 있지 않고 따라서 사용할수없다.
+//		// static 키워드가 붙어 있는 메소드에서 static 키워드가 붙어 있지 않은  변수를 참조할수없다.
+//		System.out.println(title);
+//		
+//		// public final static PrintStream out = null;
+//		// PrintStream 클래스로 만든 out이라는 객체
+//		new HelloWorld();
+//	}
+
+	// static 키워드로 프로그램 시작전 메모리에 로드된 자원은 프로그램 종료 전까지 메모리를 차지한다.
+	// 즉,메모리 낭비의 원인이 되므로 남용해서는 안된다.
+	// static으로 메모리에 로드하는 대상은 모든 클래스의 메소드에서 사용하는 전역자원이 그 대상이 된다.
+	static String name = "Sonata";
+	 String color = "Red";
+}
+
+////0-2
+//public class text0809 {
+//		public static void main(String[] args) {
+//		System.out.println(HelloWorld.name);
+//		// HelloWorld 클래스를 열어서 그안에 name을 사용한다.
+//		// HelloWorld 클래스가 갖고 있는 변수 name을 사용한다.
+//		
+//		// 1.static 키워드를 car # color변수에 붙인다.
+//		// System.out.println(car.color);
+//		
+//		// 2.color 멤버변수를 메모리에 로드하기 위해서 그 변수를 갖고 있는 클래스를 객체로 만든다. new HelloWorld();
+//		HelloWorld car = new HelloWorld();
+//		System.out.println(car.color);
+//		System.out.println(new HelloWorld().color);
+//		
+//
+//	}
+//}
+
+
+////0-3                                                  
+//public class print0809 {
+//
+//	static int x = 2;
+//	int y = 3;
+//	
+//	// static 키워드
+//	// 프로그램 시작 전 메모르에 로드된다.
+//	public static void main(String[] args) { 
+//		System.out.println(add(x,3));
+//		
+//		print0809 p = new print0809();
+//		// multiply 메소는 static키워드가 없으므로
+//		// 메모리에 로드한 후 사용해야 한다.
+//		System.out.println(p.multiply(x,3));
+//	}
+//	
+//	private static int add(int i,int j) {
+//		return i+j;
+//		
+//	}
+//	public int multiply (int a,int b) {
+//		return a*b;
+//	}
+//
+//}
+
+////2-6
+//import java.util.*;    // Scanner를 사용하기 위해 추가
+//
+//public class print0809  { 
+//
+//	public static void main(String[] args) { 
+//
+//		Scanner scanner = new Scanner(System.in);
+//
+//		System.out.print("두자리 정수를 하나 입력해주세요.>");
+//
+//		String input = scanner.nextLine();
+//		int num = Integer.parseInt(input); // 입력받은 문자열을 숫자로 변환
+//
+//		System.out.println("입력내용 :"+input);
+//		System.out.printf("num = %d%n", num);
+//	} 
+//
+//}
+
+////2-7
+//class print0809 { 
+//
+//	public static void main(String[] args) { 
+//
+//		// 출력할때는 문자로 취급하지만 내부적인 연산을 수행할때는 숫자로 취급한다.
+//		char a = 65;
+//		System.out.println(a);  // A
+//		char b = 'A';
+//		System.out.println(b);  // A
+//		char c ='A'+1;
+//		System.out.println(c);  // B
+//		
+//		char ch = 'A';	     // char ch = 65;         
+//		int code = (int)ch;  // ch에 저장된 값을 int타입으로 변환하여 저장한다.
+//
+//		System.out.printf("%c=%d(%#X)%n", ch, code, code); 
+//
+//		char hch = '가';     // char hch = 0xAC00;
+//		System.out.printf("%c=%d(%#X)%n", hch, (int)hch, (int)hch);
+//	}
+//
+//} 
+
+////2-8
+//class print0809 {
+//
+//	public static void main(String[] args) {
+//		
+//		System.out.println("'");
+//		System.out.println('\'');		     //  '''처럼 할 수 없다.
+//		System.out.println("abc\t123\b456"); // \b에 의해 3이 지워진다.
+//		System.out.println('\n');		     //  개행(new line)문자 출력하고 개행
+//		System.out.println("\"Hello\"");	 //  큰따옴표를 출력하려면 이렇게 한다.
+//		System.out.println("c:\\");
+//		
+//		System.out.println("111");
+//		System.out.println("\n\n");
+//		System.out.println("111");
+//	}
+//
+//}
+//
+//// boolean : ture /flase
+//// int  : 정수
+//// double : 실수
+//// String : 문자열 
+
+////2-12
+//class print0809 {
+//
+//	public static void main(String[] args) {
+//
+//		double d  = 85.4;
+//		
+//		// int < float < double
+//		// 정수보다 실수형의 범위가 크다.
+//		// 정수끼리는 바이트 사이즈가 큰 놈이 크다.
+//		// 실수끼리는 바이트 사이즈가 큰 놈이 크다.
+//		
+//		int score = (int)d; //개발자가 알고있으니 값이 손실될수 있음을 알고있다.
+//
+//		System.out.println("score="+score);
+//		System.out.println("d="+d);
+//	}
+//
+//}
+
+////2-13
+//class print0809 {
+//
+//	public static void main(String[] args) {
+//
+//		int  i = 10;
+//		byte b = (byte)i;
+//		System.out.printf("[int -> byte] i=%d -> b=%d%n", i, b); 
+//		
+//		i = 300;
+//		b = (byte)i;
+//		System.out.printf("[int -> byte] i=%d -> b=%d%n", i, b); 
+//
+//		b = 10;
+//		i = (int)b;
+//		System.out.printf("[byte -> int] b=%d -> i=%d%n", b, i); 
+//
+//		b = -2;
+//		i = (int)b;
+//		System.out.printf("[byte -> int] b=%d -> i=%d%n", b, i); 
+//		
+//		// 십진수를 2진수로 바꿔라.
+//		System.out.println("i="+Integer.toBinaryString(i));
+//	}
+//
+//}
+
+////3-1
+//class print0809 {
+//	
+//	public static void main(String args[]) {
+//		
+//		int i=5;
+//		System.out.println(i);
+//		
+//	
+//		i = i+1;
+//		System.out.println(i);
+//		
+//		i++;	// i=i+1;과 같은 의미이다. ++i;로 바꿔 써도 결과는 같다. 후처리 증감식
+//		System.out.println(i); 
+//		
+//		i=5;	//	결과를 비교하기 위해 i값을 다시 5로 변경.
+//		++i;	// i=i+1;과 같은 의미이다. 선처리 증감식 
+//		System.out.println(i);
+//		
+//	}
+//	
+//}
+
+////3-2
+//class print0809 {
+//	
+//	public static void main(String args[]) {
+//		// int i = 5;
+//		// int j = 0;
+//		int i=5, j=0;
+//
+//		j = i;
+//		i = i+1;
+//		// j = i++;
+//		System.out.println("j=i++; 실행 후, i=" + i +", j="+ j);
+//
+//		i=5;        // 결과를 비교하기 위해, i와 j의 값을 다시 5와 0으로 변경
+//		j=0;
+//
+//		i = i +1;
+//		j = i;
+//		// j = ++i;
+//		System.out.println("j=++i; 실행 후, i=" + i +", j="+ j);
+//	}
+//}
+
+////3-4
+//class print0809 {
+//	
+//	public static void main(String[] args) {
+//		
+//		int i = -10;
+//		i = +i;
+//		System.out.println(i);
+//
+//		i=-10;
+//		i = -i;
+//		System.out.println(i);
+//	}
+//	
+//}
+
+////3-5
+//class print0809  {
+//	
+//	public static void main(String args[]) { 
+//	
+//		int a = 10;
+//		int b = 4;
+//
+//		System.out.printf("%d + %d = %d\n",  a, b, a + b);
+//		System.out.printf("%d - %d = %d\n",  a, b, a - b);
+//		System.out.printf("%d * %d = %d\n",  a, b, a * b);
+//		System.out.printf("%d / %d = %d\n",  a, b, a / b);
+//		System.out.printf("%d / %f = %f\n",  a, (float)b, a / (float)b);
+//		
+//		
+//		
+//		int c =3;
+//		int x = c/2;	// int/int 인 경우 정수형은 소수점 부분을 버린다.
+//		double y = c / 2.0;		// int / double
+//		
+//		System.out.println(x);
+//		System.out.println(y);
+//	 
+//		// int result = 3 / 0; // 정수를 0으로 나눌수 없다.
+//		double result = 3.0 / 0;
+//		System.out.println(result);
+//	
+//	}
+//	
+//}
+
+////3-17
+//class print0809 {
+//	
+//	public static void main(String args[]) { 
+//		
+//		double pi = 3.141592; 
+//		
+//		// round(3.141592), 몇째자리에서 반올림)
+//		System.out.println(Math.round(pi));
+//		System.out.println(Math.round(pi * 10));
+//		System.out.println(Math.round(pi * 10)/ (double)10);
+//		System.out.println(Math.round(pi * 100));
+//		System.out.println(Math.round(pi * 1000)/ (double)1000);
+//		
+//		double shortPi = Math.round(pi * 1000) / 1000.0;
+//
+//		System.out.println(shortPi);
+//		
+//	}
+//	
+//}
+
+////3-18
+//	public class print0809 {
+//	
+//		public static void main(String[] args) {
+//		// #2 
+//		Math math = new Math();	
+//			
+//		//double result = Math.round();
+//		double result = math.round(3.141592, 4);
+//		System.out.println("result = " + result);
+//	}
+//	
+//}
+//	
+//	class Math {
+//		
+//		// #1 static 한번만 쓸경우 부적합
+//		double round(double value, int position) {
+//		double x = java.lang.Math.pow(10, position-1);
+//		return java.lang.Math.round(value * x) /(double) x;
+//		
+//	}
+//
+//}
+
+////3-19
+//class print0809 {
+//	
+//	public static void main(String args[]) { 
+//		
+//		int x = 10;
+//		int y = 8;
+//
+//		System.out.printf("%d을 %d로 나누면, \n", x, y); 
+//		System.out.printf("몫은 %d이고, 나머지는 %d입니다.\n", x / y, x % y); 
+//	
+//	}
+//	
+//}
+
+import java.util.Scanner;
+
+////0-4
+//import java.util.Scanner; 
+//// import 자동 추가 단축키 : 컨트롤 쉬프트 o키
+//
+//public class text2_0809 {
+//
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		
+//		// 콘솔로 숫자를 1개 받는다.
+//		Scanner scan = new Scanner(System.in);
+//		
+//		System.out.println("숫자를 하나 입력하세요: ");
+//		
+//		String number = scan.nextLine();
+//		
+//		System.out.println("입력된 숫자 =  " + number);
+//		
+//		// 짝수 , 홀수 여부를 콘솔에 출력한다.
+//		
+//		int num = Integer.parseInt(number);
+//		
+//		if ((num %2)==0) {
+//			
+//			System.out.println("짝수");
+//		} 
+//		
+//		else {
+//			System.out.println("홀수");
+//		}
+//		
+//		if (num %2!=0) {
+//			
+//			System.out.println("홀수");
+//		} 
+//		
+//		else {
+//			System.out.println("짝수");
+//		}
+//		
+//	}
+//
+//}
+
+////3-21
+//class text2_0809 {
+//	
+//	public static void main(String args[]) { 
+//		
+//		System.out.printf("10 == 10.0f  \t %b\n", 10 == 10.0f);
+//		System.out.printf("'0'== 0      \t %b\n", '0'== 0);
+//		System.out.printf("'\\0'== 0    \t %b\n", '\0'== 0);
+//		System.out.printf("'A'== 65     \t %b\n", 'A'== 65);
+//		System.out.printf("'A' > 'B'    \t %b\n", 'A' > 'B');
+//		System.out.printf("'A'+1 != 'B' \t %b\n", 'A'+1 != 'B');
+//		
+//		System.out.println('b' >= 'A'+1); //왼쪽이 오른쪽보다 크면 true, 왼쪽이 오른쪽과 같으면 true
+//	
+//	}
+//
+//}
+
+
+////3-23
+//class text2_0809 {
+//	
+//	public static void main(String[] args) {
+//		// 문자열은 new 연산자 없이 다음과 같은 짧은 문법으로 등록하는 것을 권장한다.
+//		// 다음 문법으로 문자열을 저장하고자 시도하면 
+//		// 해당 문자열이 이미 메모리에 존재하는지 확인하고 있으면 그대로 사용하고, 없으면 새로운 객체를 만들어서 참조를 할당한다.
+//		// 문자열 불변방식으로 관리된다.
+//		// 문자열만 해당 , 숫자는 안됌
+//		String str1 = "abc"; // <== new
+//		
+//		String a = str1;
+//		String b = "abc"; // 위에서 만든객체 참조 
+//		
+//		// 문자열 데이터의 재 사용성을 극대화하여 메모리를 아끼고자
+//		// 해당 문자열을 갖고있는 String 객체가 존재하면 그 객체를 그대로 사용한다.
+//		
+//
+//		System.out.println(b.length());
+//		System.out.println("abc".length()); // "문자열" 하는 것만으로 String 객체로 인정한다.
+//		
+//		System.out.println(str1==a);
+//		System.out.println(str1==b);
+//		
+//		// String도 클래스이기 때문에 원한다면 new 연산자로 객체를 만들고 그 객체가 문자열을 보관하도록 할 수 있다.
+//		
+//		String str2 = new String("abc");
+//
+//		
+//		System.out.printf("\"abc\"==\"abc\" ? %b%n", "abc"=="abc");
+//		System.out.printf(" str1==\"abc\" ? %b%n",    str1=="abc");
+//		System.out.printf(" str2==\"abc\" ? %b%n",    str2=="abc");
+//		// 문자열은 힙영역에 객체가 갖고 있다.
+//		// 그런데 비교연산자 == 로 비교를 시도하면 이는 참조값을 비교하는 것이므로 
+//		// 실제값을 보관하는 값을 비교하고자 할 때 적당하지 않다.
+//		// 변수가 가리키는 실제 객체가 보관하는 문자열 자체를 비교하고자 할 때 equals 메소드를 사용해야 한다.
+//		System.out.println();
+//		System.out.println(str1==str2);		//false
+//		System.out.println(str1.equals(str2));		//true, 99% 이렇게 비교해야하는 경우가 대부분이다.
+//		System.out.println();
+//
+//		
+//		
+//		
+//		System.out.printf("str1.equals(\"abc\") ? %b%n", str1.equals("abc"));
+//		System.out.printf("str2.equals(\"abc\") ? %b%n", str2.equals("abc"));
+//		System.out.printf("str2.equals(\"ABC\") ? %b%n", str2.equals("ABC"));
+//		System.out.printf("str2.equalsIgnoreCase(\"ABC\") ? %b%n", str2.equalsIgnoreCase("ABC"));
+//	
+//	}
+//	
+//}
+
+////3-24
+//class text2_0809 {
+//	public static void main(String args[]) { 
+//		int  x = 0;
+//		char ch = ' ';
+//
+//		x = 15;
+//		System.out.printf("x=%2d, 10 < x && x < 20 =%b\n", x, 10 < x && x < 20);
+//		// x=15; 10< x && x < 20 = true
+//		
+//		x = 6;
+//		System.out.printf("x=%2d,  x%%2==0 || x%%3==0  && x%%6!=0 =%b\n", 	
+//			x , (x %2 == 0) || ((x %3==0) && (x%6 != 0)));
+//		// x = 6, x%2==0 || x%3==0 && x%6 !=0 = true	
+//		System.out.printf("x=%2d, (x%%2==0 || x%%3==0) && x%%6!=0 =%b\n", x,(x%2==0||x%3==0)&&x%6!=0);
+//
+//		ch='1';
+//		System.out.printf("ch='%c', '0' <= ch && ch <= '9' =%b\n", ch, '0' <= ch && ch <='9');
+//
+//		ch='a';
+//		System.out.printf("ch='%c', 'a' <= ch && ch <= 'z' =%b\n", ch, 'a' <= ch && ch <='z');
+//
+//		ch='A';
+//		System.out.printf("ch='%c', 'A' <= ch && ch <= 'Z' =%b\n", ch, 'A' <= ch && ch <='Z');
+//
+//		ch='q';
+//		System.out.printf("ch='%c', ch=='q' || ch=='Q' =%b\n", ch, ch=='q' || ch=='Q');
+//	}
+//}
+
+////3-26
+//class text2_0809 {
+//	
+//	public static void main(String[] args) { 
+//		
+//		int a = 5;
+//		int b = 0;
+//
+//		System.out.printf("a=%d, b=%d%n", a, b);
+//		System.out.printf("a!=0 || ++b!=0 = %b%n", a!=0 || ++b!=0);
+//		
+//		System.out.printf("a=%d, b=%d\n", a, b);
+//		System.out.printf("a==0 && ++b!=0 = %b%n", a==0 && ++b!=0);
+//		
+//		System.out.printf("a=%d, b=%d%n", a, b);
+//		
+////		Scanner scan = new Scanner(System.in);
+////		System.out.print("영어점수를 입력하세요: ");
+////		int eng = scan.nextInt();
+////		
+////		System.out.print("수학점수를 입력하세요: ");
+////		int math = scan.nextInt();
+////		
+////		if (eng >= 90 && math >= 90) {
+////			System.out.print("A");
+////		}
+////		else if (eng >= 80 && math >= 80) {
+////			System.out.print("B");
+////		}
+////		else if (eng >= 70 && math >= 70) {
+////			System.out.print("C");	
+////		}	
+//		
+//		int x = 2;
+//		System.out.println(x>3 || 3/0 > 2);
+//		
+//	} // main의 끝
+//	
+//}
+
+////3-27
+//class text2_0809 {
+//	
+//	public static void main(String[] args) { 
+//		
+//		boolean  b  = true; 
+//		char ch = 'C';
+//		
+//		System.out.printf("b=%b\n", b);
+//		System.out.printf("!b=%b\n", !b);
+//		System.out.printf("!!b=%b\n", !!b);
+//		System.out.printf("!!!b=%b\n", !!!b);
+//		System.out.println();
+//
+//		System.out.printf("ch=%c\n", ch);
+//		System.out.printf("ch < 'a' || ch > 'z'=%b\n", ch < 'a' || ch > 'z');
+//	    System.out.printf("!('a'<=ch && ch<='z')=%b\n", !('a'<= ch && ch<='z'));
+//	    System.out.printf("  'a'<=ch && ch<='z' =%b\n",   'a'<=ch && ch<='z');
+//	
+//	} // main의 끝
+//	
+//}
+
+
+////3-32
+//class text2_0809 {
+//	
+//	public static void main(String args[]) { 
+//		int ssn = 2;
+//		boolean condition = true; 
+//		
+//		if (ssn==1) {
+//			// 조건이 true면 이 영역한에 코드를 수행한다.
+//			System.out.println("남성");
+//		} else {
+//			// 조건이 false면 이 영역한에 코드를 수행한다.
+//			System.out.println("여성");
+//		}
+//
+//		// if ~else 구문을 삼항연산자로 치환해서 표현 할수있다.
+//		System.out.println(ssn == 1 ? "남성" : "여성");
+//		
+//		int  x, y, z;
+//		int  absX, absY, absZ;
+//		char signX, signY, signZ;
+//
+//		x = 10;
+//		y = -5;
+//		z = 0;
+//		// 삼항연산자
+//		// 1항 ? 2항 : 3 항
+//
+//		absX = x >= 0 ? x : -x;  // x의 값이 음수이면, 양수로 만든다.
+//		absY = y >= 0 ? y : -y;
+//		absZ = z >= 0 ? z : -z;
+//
+//		signX = x > 0 ? '+' : ( x==0 ? ' ' : '-');  // 조건 연산자를 중첩
+//		signY = y > 0 ? '+' : ( y==0 ? ' ' : '-'); 
+//		signZ = z > 0 ? '+' : ( z==0 ? ' ' : '-'); 
+//
+//		System.out.printf("x=%c%d\n", signX, absX);
+//		System.out.printf("y=%c%d\n", signY, absY);
+//		System.out.printf("z=%c%d\n", signZ, absZ);
+//		
+//	}
+//	
+//}
+
+////0-5
+//class text2_0809 {
+//	
+//	public static void main(String args[]) { 
+//
+//	int a =  10;
+//	
+//	a = a +3;
+//	
+//	System.out.println(a);
+//	
+//	a += 3;
+//	System.out.println(a);
+//		
+//	int i = 1;
+//	
+//	i += 2;
+//	i *= 2;
+//	System.out.println(i);
+//		
+//	}
+//	
+//}
+
+
+////4-1
+//class  text2_0809  {
+//	
+//	public static void main(String[] args) { 
+//		int x= 0;
+//
+//		System.out.printf("x=%d 일때, 참인 것은%n", x);
+//
+////		if (x == 0) {
+////			System.out.println("x==0");
+////		}
+//		
+//		//조건문의 범위연산자를 생략하면 다음 ; 새미콜론을 만날때까지 범위를 삼는다. 
+//		if(x!=0) System.out.println("x!=0");
+//		if(!(x==0)) System.out.println("!(x==0)");
+//		if(!(x!=0)) System.out.println("!(x!=0)");
+//		System.out.println();
+//
+//		x = 1;
+//		System.out.printf("x=%d 일때, 참인 것은%n", x);
+//
+//		if(x==0) System.out.println("x==0");
+//		if(x!=0) System.out.println("x!=0");
+//		if(!(x==0)) System.out.println("!(x==0)");
+//		if(!(x!=0)) System.out.println("!(x!=0)");
+//		
+//	}
+//	
+//}
+
+////4-2
+//class text2_0809 {
+//
+//	public static void main(String[] args) {
+//
+//		int input;
+//
+//		System.out.print("숫자를 하나 입력하세요.>");
+//
+//		Scanner scanner = new Scanner(System.in);
+//		String tmp = scanner.nextLine(); // 화면을 통해 입력받은 내용을 tmp에 저장
+//		input = Integer.parseInt(tmp); // 입력받은 문자열(tmp)을 숫자로 변환
+//
+//		if (input == 0) {
+//			System.out.println("입력하신 숫자는 0입니다.");
+//		}
+//
+//		if (input != 0)
+//			System.out.println("입력하신 숫자는 0이 아닙니다.");
+//		System.out.println("입력하신 숫자는 " + input + "입니다.");
+//
+//		some();	
+//	} // main의 끝
+//
+//	
+//	static void some() {
+//		if (true) {
+//			System.out.println("Hello ");
+//			
+//		}
+//		if (true) 
+//		{
+//			System.out.println("World! ");
+//			
+//		}
+//	}
+//}
+
+////4-2
+//class text2_0809 {
+//	
+//	public static void main(String[] args) {  
+//		
+//		int input;
+//
+//		System.out.print("숫자를 하나 입력하세요.>");
+//
+//		Scanner scanner = new Scanner(System.in);
+//		String tmp = scanner.nextLine(); // 화면을 통해 입력받은 내용을 tmp에 저장
+//		input = Integer.parseInt(tmp);   // 입력받은 문자열(tmp)을 숫자로 변환
+//
+//		if(input==0) {
+//			System.out.println("입력하신 숫자는 0입니다.");	
+//		} else { // input!=0인 경우
+//			System.out.println("입력하신 숫자는 0이 아닙니다.");
+//		}
+//	
+//	} // main의 끝
+//	
+//}
+
+
+////4-4
+//class text2_0809Ex4 {
+//	public static void main(String[] args) { 
+//		int score  = 0;   // 점수를 저장하기 위한 변수
+//		char grade =' ';  // 학점을 저장하기 위한 변수. 공백으로 초기화한다.
+//
+//		System.out.print("점수를 입력하세요.>");
+//		Scanner scanner = new Scanner(System.in);
+//		String tmp = scanner.nextLine(); // 화면을 통해 입력받은 내용을 tmp에 저장
+//		score = Integer.parseInt(tmp);   // 입력받은 문자열(tmp)을 숫자로 변환
+//
+//		if (score >= 90) {         // score가 90점 보다 같거나 크면 A학점
+//			 grade = 'A';             
+//		} else if (score >=80) {   // score가 80점 보다 같거나 크면 B학점 
+//			 grade = 'B'; 
+//		} else if (score >=70) {   // score가 70점 보다 같거나 크면 C학점 
+//			 grade = 'C'; 
+//		} else {                   // 나머지는 D학점
+//			 grade = 'D'; 
+//		}
+//            
+//		System.out.println("당신의 학점은 "+ grade +"입니다."); 
+//	}
+//}
+
+
+////4-5
+//class text2_0809 {
+//	public static void main(String[] args) { 
+//		int  score = 0;
+//		char grade = ' ';
+//		char opt   = '0';
+//
+//		System.out.print("점수를 입력해주세요.>");
+//
+//		Scanner scanner = new Scanner(System.in);
+//		String tmp = scanner.nextLine(); // 화면을 통해 입력받은 내용을 tmp에 저장
+//		score = Integer.parseInt(tmp);   // 입력받은 문자열(tmp)을 숫자로 변환
+//		
+//		System.out.printf("당신의 점수는 %d입니다.", score);
+//
+//		if (score >= 90) {		      // score가 90점 보다 같거나 크면 A학점(grade)
+//			grade = 'A';
+//			if (score >= 98) { 	      // 90점 이상 중에서도 98점 이상은 A+
+//				opt = '+';	
+//			} else if (score < 94) {  // 90점 이상 94점 미만은 A-
+//				opt = '-';
+//			}
+//		} else if (score >= 80){	  // score가 80점 보다 같거나 크면 B학점(grade)
+//			grade = 'B';
+//			if (score >= 88) {
+//				opt = '+';
+//			} else if (score < 84)	{
+//				opt = '-';
+//			}
+//		} else {				      // 나머지는 C학점(grade)
+//			grade = 'C';
+//		}
+//			
+//		System.out.printf("당신의 학점은 %c%c입니다.%n", grade, opt);
+//	}
+//}
+
+
+패키지 Bird 생성후 클래스 3개 (1-1,1-2,1-3)생성 
+
+//package bird;
+////1-1
+//public class AngryBird {
+//	String color = "Red";
+//	
+//	public void forward() {
+//		System.out.println("AngryBird # forward() called.");
+//	}
+//	public void turnLeft() {
+//		System.out.println("AngryBird # turnLeft() called.");
+//	}
+//	public void turnRight() {
+//		System.out.println("AngryBird # turnRight() called.");
+//	}
+//}
+
+
+//package bird;
+////1-2
+//public class Badpig {
+//	String color = "green";
+//	
+//	public void sound() {
+//		System.out.println("Badpig # sound() calles.");
+//	}
+//}
+
+
+
+//package bird;
+////1-3
+//public class App {
+//
+//	public static void main(String[] args) {
+//		
+//		AngryBird bird = new AngryBird();
+//		Badpig pig = new Badpig();
+//		
+//		bird.forward();
+//		bird.forward();
+//		bird.turnRight();
+//		bird.forward();
+//		
+//		pig.sound();
+//	}
+//} 

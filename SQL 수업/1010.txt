@@ -1,0 +1,194 @@
+2018/10/10
+
+
+database
+
+data -> information -> truth,knowledge
+
+오라클 DBMS server
+
+자신의 장비에 오라클을 구성하기 위해서는?
+
+1. 오라클 서버 인스톨(oracle enterprise 11gR2)
+
+2. 접속을 위한 application 인스톨
+ 2-1 오라클에서 제공하는 것: SQLPLUS(ORACLE CLIENT), SQL-DEVELOPER
+ 2-2 다른 회사에서 마늘어서 파는것(일명 3d party 제품)은
+  toad, golden, pledit, sql navigator, etc
+
+3. 접속 환경 설정
+ 3-1 SQLPLUS를 쓰는 경우 (path 등록 체크와 tnsnames.ora의 설정)
+ 3-2 SQL-DEVELOPER는 접속창을 제공하므로 그곳에 접속정보를 저장한다.
+
+학원 오라클이 깔려있는 서버에 접속하기 위해서는??
+1. 접속을 위한 application 인스톨
+2. 접속 환경 설정
+
+*
+DEDICATED 는 SERVICE_NAME 과 시스템이름이 같다. or 멀티 쓰레드는 다를수 있음.
+
+
+1. https://www.oracle.com -> 다운로드 -> Database -> Database 11g Enterprise/Standard Editions
+-> 윈도우버전 see all -> 클라이언트 설치
+2. https://www.oracle.com -> 다운로드 -> Developer Tools -> SQL Developer -> 윈도우버전 
+-> Windows 64-bit with JDK 9 included  설치 
+
+# 클라이언트 파일 열기 -> set up 클릭 -> 파일이 깔려있으면 런타임으로 설치 
+c-app-product-버전-client - network 파일이 있으면 런타임으로 설치 / 없으면 인스톨 버전
+ora 파일 설정시 공백 허가 하지 않음
+-설정시 저장이 되지않는다면 속성-보안- 편집-모든권한 허용
+
+-명령창에 sqlplus 해보면 되지않음 
+-> 제어판 -> 시스템 -> 고급 시스템 설정 -> 환경변수 -> 사용자변수의 path 클릭 -> 
+(c-app-product-버전-client -BIN 폴더 들어와서 패스 복사 ) -> BIN폴더 주소 등록하기 
+
+# sqldevelopor 는 이전에 설치됬던 아니던간에 다시 설치하면됌 (아니오누름)
+
+
+
+
+
+접속해보기 ->
+sqlplus test5/test5@topcredu (5 : 포트번호는 1-9까지 사용 가능)
+: 다음에 접속됨:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options 
+성공
+
+
+sysdba - 시스템 최고권한
+
+SQL디벨로퍼 실행 -> 접속 or +버튼 클릭 -> 접속자 이름: 내마음대로      -> 접속 
+				/ 사용자이름 : 내가 지정했던 이름(test5)
+				/ 비밀번호 : test5 / 비밀번호 저장
+				/ 호스트 이름 : 내가 등록했던 호스트번호
+				/ sid : topcredu (SERVICE_NAME)
+
+오라클 문법 - 
+-- 한줄적요
+
+/* 주석입니다.*/
+
+명령어 : 세미콜론(;)
+
+select * from table;
+
+오라클은 크롬으로 연다 
+오라클 파일 만들기 
+ed script(파일명)
+-> 메모장으로 열기 파일 코드 저장 
+명령창에 다시하면 ed script(파일명) 실행 
+-> 메모장으로 열림 
+
+
+라인사이즈 - 한줄 사이즈
+타이밍 - 뜨는 속도
+페이지사이즈30 - 한줄헤더의 줄 수 
+
+
+CMD -> SQLPLUS -> 접속 (new session) -> 조정 -> exit(quit) -> 초기화 
+
+초기화된 파일에게 스타일을 적용하기 
+1. 새로 sql만들기 ed script1-1(파일명)
+	set linesize 130
+	set pagesize 30
+	set timing on
+	-> 조정 하고 싶은 스타일들만 코드 적고 저장 
+
+2. 만들어논 스타일 적용
+	@script1-1 / 로 적용
+
+3. 확인하기 
+
+
+# 2pc : 2phase commit
+
+<process>  --> ameria
+	   --> eu
+
+all or nothing 
+둘다 되던가 안되던가 
+
+
+#emp 
+
+sal = 10%인상
+
+delete from emp;
+update emp set sal = sal + (sal*10%);
+
+1. 백업이 필요한가?
+2. 롤백세그먼트를 DBA에게 umlimited 로 받아야 하는가?
+
+9:00 ~ 17:00 rollback segment overflow 
+
+# scott/test1,2,3,4... (스키마 schema)
+
+
+#user_tables, user_tab_coloums
+
+
+p43 cols ->  user_tab_columns
+
+# 돌아가는 순서 
+   select --5 
+   from --1 
+   where --2 
+   group by --3
+   having --4
+   order by --6
+
+select empno,ename, sal, deptno from emp where deptno =20 order by ename;
+-> emp파일에 empno,ename, sal, deptno 보여줘 대신 deptno =20번대 부터 ename 순으로 보여줘
+
+select deptno from emp;
+default ==> select all deptno from emp;
+중복을 제외 한건씩만 distinct ==> select distinct deptno from emp;
+
+A. select deptno from emp group by deptno;
+A = B
+A의 활용 ==>
+A. select deptno , count(*), sum(sal), avg(sal), max(sal), min(sal) from emp group by deptno; 
+A. select deptno , count(*), sum(sal), avg(sal), max(sal), min(sal) from emp; 
+sum,avg,count,max,min,stddev...
+
+select empno,ename,deptno, sal  from emp order by sal;
+default ==> select empno,ename, deptno, sal from emp order by sal asc;
+sal을 많이 받는 사람이 우선 먼저 나오도록 정렬하여 주세요.
+empno,ename, deptno, sal from emp order by sal desc; 
+
+select distinct deptno,job from emp order by deptno,job;
+ = select deptno,job from emp group by deptno,job order by deptno,job;
+-> distinct 권장하지 않음 group by써라 (중복되는거 삭제) 
+앞에 보여주는것은 중요치 않음 마지막 그룹핑순서가 중요  
+
+select deptno, job, sum(sal) from emp group by deptno,job order by deptno, job;
+->    
+   DEPTNO JOB         SUM(SAL)
+---------- --------- ----------
+        10 CLERK               1300
+        10 MANAGER         2450
+        20 ANALYST           6000
+        20 CLERK                1900
+        20 MANAGER         2975
+        30 CLERK                 950
+        30 MANAGER         2850
+        30 SALESMAN        5600
+           PRESIDENT          5000
+
+select job, deptno, sum(sal) from emp group by deptno,job order by deptno, job;
+->  
+JOB           DEPTNO   SUM(SAL)
+--------- ---------- ----------
+CLERK                 10       1300
+MANAGER           10       2450
+ANALYST             20       6000
+CLERK                  20       1900
+MANAGER           20       2975
+CLERK                  30        950
+MANAGER           30       2850
+SALESMAN          30       5600
+PRESIDENT                     5000 
+
+
+	

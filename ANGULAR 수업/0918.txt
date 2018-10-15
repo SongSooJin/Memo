@@ -1,0 +1,8 @@
+2018/09/18
+
+dependencies : 고객사용
+devDependencies : 개발자 사용
+
+
+dev development 개발시
+prod production 서비스할때

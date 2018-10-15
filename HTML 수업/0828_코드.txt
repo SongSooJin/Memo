@@ -1,0 +1,75 @@
+2018/08/28
+
+자바수업_코드
+
+T,? 차이는 무엇?
+T : bound
+? : unbound
+
+지네릭은 코딩할때 타입 안정성을 확보하기 위해 사용하는 기술로
+컴파일ㅇ하면 ㅈ지네릭관련 콬드가 모두 사라진다.
+따라서 지네릭은 오토캐스팅을 지원하지 않는다
+
+T는 확정 ?는 아무거나 
+
+////0-1
+//package day3;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class T {
+//	public static void main(String[] args) {
+//
+//		/*
+//		 * 지네릭은 코딩할때 타입 안정성을 확보하기 위해 사용하는 기술로
+//		 * 컴파일ㅇ하면 ㅈ지네릭관련 콬드가 모두 사라진다.	
+//         * 따라서 지네릭은 오토캐스팅을 지원하지 않는다
+//         */
+//		
+//		
+//		List<? extends Object> names;
+//
+//		names = new ArrayList<String>();
+//		names = new ArrayList<Integer>();
+//		names.add(null);
+//
+//		List<Object> names2;
+////		names2 =  new ArrayList<String>();
+////		names2 =  new ArrayList<Integer>();
+////		names2.add(null);
+//
+//	}
+//}
+//
+//class mybox <T extends Object> {
+//	List<T> list = new ArrayList<T>();
+//
+//	public T getLAst(List<T> data) {
+//		return list.get(list.size() - 1);
+//	}
+//
+//	public void setList(List<? extends Object> data) {
+//		list = (List<T>)data;
+//	}
+//}
+//
+
+
+Java 
+- 윈도우 CUI : Stands Alone
+- 서블릿 웹 : Server
+
+Javascript
+- 브라우저 내에서 화면 제어
+- 노드 : Server
+
+
+<pre>table>(tr>td*3)*3</pre>  
+div>h3+(ul>li)+(dl>dt+dd)
+
+
+
+
+
+

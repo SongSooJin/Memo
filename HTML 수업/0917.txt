@@ -1,0 +1,7 @@
+2018/09/17
+
+https://store.musinsa.com/app/product/detail/621274/0
+
+>node p425.js
+
+npm i --save-dev babel-preset-env

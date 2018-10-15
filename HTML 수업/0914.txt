@@ -1,0 +1,15 @@
+2018/09/14
+
+npm i -g json-server
+json-server --watch db.json
+
+json-server db.json
+
+p400 ∆‰¿Ã¡ˆ 
+
+  "users": [
+    {"id": 1, "name": "Tom", "job": "Programmer"},
+    {"id": 2, "name": "David", "job": "Designer"},
+    {"id": 3, "name": "John", "job": "Manager"},
+    {"id": 4, "name": "Frank", "job": "Programmer"}
+  ]

@@ -1,0 +1,102 @@
+2018/7/27
+
+C언어 시간
+
+RDB 는 표형태로 된 데이터
+
+
+테이블 : 행과 열이 만나 구성하는 표
+
+*객체(오브젝트)구성 
+field = 테이블의 열에 해당 = col / item / 항목 / attribute / 속성 
+
+2의 10승 = 1024 = 1K / 1M=1048576 / 1G / 1T / 1P(페타) / 1E(엑사) / 1Z(제타) / 1Y(요타)
+
+record = 테이블의 행에 해당 = row / tuple 
+
+record의 종류
+(로지컬)논리record : 개념,정보 
+(피지컬)물리record =block , : 크기,저장  
+
+file : 연관있는 record의 집합 / 개인사무처리 /한계있음 
+DB : file이 모인것 /개인사무처리 조직으로 통합 ,저장 ,운영 공유 
+
+디비와 파일의 차이 : DB는 통합 ,저장 ,운영 공유 .데이터의 정확성=무결성, 독립성 
+		     file은 데이터가 중복될수있다.=종속성  
+		     / DB전 단계는 file 
+
+bit : 자료정보 표현의 최소 단위, 이진법, 문자표현단위 1byte = 8bit
+      ex> ASCll(표준 문자 코드) > 유니코드 : 전세계 문자 코드 =16bit = 2byte0
+	  A 0100     0001      a 0110 0001 
+	    zone비트 date비트
+
+byte: 1byte = 8bit / 주소지정의 단위
+
+word(워드): 컴퓨터 내에서 움직이는 단위
+워드의 종류 3가지 반워드:2byte (별 말이없으면)풀워드:4byte 더블워드:8byte
+
+코드 : ex> 주민번호  
+
+프리렉 - C강의자료 
+https://poiemaweb.com/ - 최신정보
+https://www.inflearn.com/ - 동영상 과목 
+
+
+
+비쥬얼 스튜디오 
+
+보기 - 솔루션 탐색기 / 출력
+
+파일 만들기 : 파일- 새로만들기 - 프로젝트 - 왼쪽 visual C++ 선택 가운데 기본값 windows콘솔 응용 프로그램 선택후 파일이름 바꾸기+ 파일위치 선정하기 - 확인
+ 	      확인후 만들어진 솔루션 탐색기부분클릭 - 추가 - 새항목 왼쪽 visual C++선택 기본값 C++파일 선택 - 파일이름 바꾸기 확장자 .C로 바꾸기- 추가 - 완성  	 
+
+새항목 만들때 .C로 바꿔주기 안그러면 .cpp로 저장됨
+
+C언어 특징  : 적어도 하나의 함수언어로 만들어짐  / 메인함수가 제일 처음 / return 0 = false 1 = true
+ss
+
+printf = 정확하게 출력 f는 함수 줄바꿈 = \n 주석처리 : // 한줄 /*여러줄*/
+
+system("PAUSE") : 일시정지 중간에 넣으면 일시정지 끝에 넣으면 결과처리 보여준다음 멈춤
+
+
+
+
+
+/*
+#include<stdio.h>
+
+int main(void) {
+
+	printf("c:\\work \n");
+	printf("Hello c world \n");
+	printf("sw \" 응용\" 2기 \n");
+	system("pause");
+	printf("안녕하세요 저는 박성효입니다. \n");
+	printf("연락처 010 7919 3575 \n");
+	printf("메일주소 parksh-7@daum.net \n");
+	system("pause");
+
+	return 0;
+}
+*/
+
+/*
+#include <stdio.h>
+
+int main(void) {
+	int answer = 0;
+	answer = sum(3, 4);
+	printf("%d \n", answer);
+
+	system("pause");
+
+	return 0;
+}
+
+int sum(int x, int y) {
+	int result = 0;
+	result = x + y;
+	return result;
+}
+*/

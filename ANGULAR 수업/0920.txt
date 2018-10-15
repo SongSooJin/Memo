@@ -1,0 +1,13 @@
+버튼 클릭 =>handleClick(contactName.value, contactTele.value)실행
+contactName.value => input박스의 contactName를 가르킴 
+contactTele.value =>input박스의 contactTele를 가르킴
+handleClick(name: string, tele: string)
+
+EventEmitter 사용해서 save.next({ name: name, telephone: tele }함
+
+부모인  (save)="rective($event) 지점에서 이벤트 방출 $event전달받을걸 방출하는 예약어
+
+{{init | json}}  왼쪽의 데이터를 출력
+
+
+Angular-Simple?Example폴더 위치에 cmd실행 => ng g c experiments 입력 =>  src폴더 안에 experiments 폴더가 생성

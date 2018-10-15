@@ -1,0 +1,755 @@
+2018/08/14
+
+자바수업_코드
+
+
+////6-2
+//class TvTest2 {
+//	public static void main(String args[]) {
+//		Tv t1 = new Tv();  // Tv2 t1; t1 = new Tv2();를 한 문장으로 가능
+//		Tv t2 = new Tv();
+//		System.out.println("t1의 channel값은 " + t1.channel + "입니다.");
+//		System.out.println("t2의 channel값은 " + t2.channel + "입니다.");
+//
+//		t1.channel = 7;	// channel 값을 7으로 한다.
+//		System.out.println("t1의 channel값을 7로 변경하였습니다.");
+//
+//		System.out.println("t1의 channel값은 " + t1.channel + "입니다.");
+//		System.out.println("t2의 channel값은 " + t2.channel + "입니다.");
+//	}
+//}
+//
+///*
+//class Tv { 
+//    // Tv의 속성(멤버변수) 
+//    String color;          // 색상 
+//    boolean power;         // 전원상태(on/off) 
+//    int channel;           // 채널 
+//
+//    // Tv의 기능(메서드) 
+//    void power()   { power = !power; }  // TV를 켜거나 끄는 기능을 하는 메서드 
+//    void channelUp()   {  ++channel; }  // TV의 채널을 높이는 기능을 하는 메서드 
+//    void channelDown() {  --channel; }  // TV의 채널을 낮추는 기능을 하는 메서드 
+//}
+//*/
+
+
+////6-5
+//class CardTest{
+//	public static void main(String args[]) {
+//		// static 변수는 프로그램 시작 전 자동으로 메모리에 로드 된다. (메소드 에어리어에 로드)
+//		// 메모리에 해당 변수가 올라가 있기 때문에 new Card() 명령으로 객체를 만들지 않고도 해당 변수를 사용할 수 있다. 
+//		System.out.println("Card.width = "  + Card.width);
+//		System.out.println("Card.height = " + Card.height);
+//
+//		// 인스턴스 변수는 해당 변수를 갖고 있는 클래스를 new 연산자로 인스턴스해서 객체를 만들때 같이 메모리에 할당된다. (힙메모리에 로드).
+//		// 인스컨스 변수는 메모리에 자동으로 올라가지 않으므로 static 변수처럼 바로 사용할 수 없다. 
+//		Card c1 = new Card();
+//		c1.kind = "Heart";
+//		c1.number = 7;
+//
+//		Card c2 = new Card();
+//		c2.kind = "Spade";
+//		c2.number = 4;
+//
+//		System.out.println("c1은 " + c1.kind + ", " + c1.number + "이며, 크기는 (" + c1.width + ", " + c1.height + ")" );
+//		System.out.println("c2는 " + c2.kind + ", " + c2.number + "이며, 크기는 (" + c2.width + ", " + c2.height + ")" );		
+//
+//		System.out.println("c1의 width와 height를 각각 50, 80으로 변경합니다.");
+//		c1.width = 50;
+//		c1.height = 80;
+//
+//		System.out.println("c1은 " + c1.kind + ", " + c1.number + "이며, 크기는 (" + c1.width + ", " + c1.height + ")" );
+//		System.out.println("c2는 " + c2.kind + ", " + c2.number + "이며, 크기는 (" + c2.width + ", " + c2.height + ")" );
+//	}
+// }
+//
+//class Card {
+//	String kind ;				// 카드의 무늬 - 인스턴스 변수
+//	int number;				    // 카드의 숫자 - 인스턴스 변수
+//	// 모든 카드가 크기가 같다. 따라서 객체마다 카드의 넓이 높이 정보를 각각 갖고 있을 필요가 있다.
+//	static int width = 100;		// 카드의 폭  - 클래스 변수
+//	static int height = 250;	// 카드의 높이 - 클래스 변수
+//}
+
+
+////6-6
+//class MyMathTest {
+//	public static void main(String args[]) {
+//		MyMath mm = new MyMath();
+//		long result1 = mm.add(5L, 3L); // 결과값  : 8 
+//		long result2 = mm.subtract(5L, 3L); // 결과값 : 2
+//		long result3 = mm.multiply(5L, 3L); // 결과값 : 15
+//		double result4 = mm.divide(5L, 3L); // 결과값 : 1.666666...System.out.println(power(2,1));  // 2 ^ 1 = 2 System.out.println(power(2,1));  // 2 ^ 1 = 2 System.out.println(power(2,1));  // 2 ^ 1 = 2 
+//		System.out.println("add(5L, 3L) = "      + result1);
+//		System.out.println("subtract(5L, 3L) = " + result2);
+//		System.out.println("multiply(5L, 3L) = " + result3);
+//		System.out.println("divide(5L, 3L) = "   + result4);
+//	}
+//}
+//
+//class MyMath {
+//	long add(long a, long b) {
+//		long result = a+b;
+//		return result;
+//	//	return a + b;	// 위의 두 줄을 이와 같이 한 줄로 간단히 할 수 있다.
+//	}
+//
+//	long subtract(long a, long b) {
+//		return a - b;
+//	}
+//
+//	long multiply(long a, long b) {
+//		return a * b;
+//	}
+//
+//	double divide(double a, double b) {
+//		return a / b;
+//	}
+//}
+
+
+////6-7
+//class CallStackTest { // 최상위에서 작용하는게 현재 적용 
+//	public static void main(String[] args) {
+//		// 코드1
+//		firstMethod();
+//		// 코드2
+//	}
+//
+//	static void firstMethod() {
+//		// 코드3
+//		secondMethod();
+//		// 코드4
+//	}
+//
+//	static void secondMethod() {
+//		//코드5
+//		System.out.println("secondMethod()");		
+//		//코드6
+//	}
+//}
+
+
+
+////6-9
+//class Data { int x; }
+//
+//class PrimitiveParamEx {
+//	public static void main(String[] args) {
+//		Data d = new Data();
+//		d.x = 10;
+//		System.out.println("main() : x = " + d.x);
+//
+//		change(d.x);
+//		System.out.println("After change(d.x)");
+//		System.out.println("main() : x = " + d.x);
+//	}
+//
+//	static void change(int x) {  // 기본형 매개변수
+//		
+//		x = 1000;
+//		System.out.println("change() : x = " + x);
+//	}
+//}
+
+////6-9_1
+//class PrimitiveParamEx2_1 {
+//	
+//	
+//	public static void main(String args[]) throws Exception {
+//	
+//	p();	
+//	
+//	}
+//	// 무한루프에 빠지는 로직은 결국 메모리 부족으로 예외가 발생하여 중단된다. 이런 로직은 금기다.
+//	private static void p() throws Exception {
+//		System.out.println("Hello");
+//		Thread.sleep(2000);
+//		p();
+//		
+//	}
+//}
+
+
+////6-9_2
+//
+//
+//class PrimitiveParamEx2_2 {
+//		static int count = 0;
+//		
+//		public static void main(String[] args) throws InterruptedException {
+//			p();
+//		}
+//		
+//		// Hello6254
+//		// Exception in thread "main" java.lang.StackOverflowError
+//		// 무한루프에 빠지는 로직은 결국 메모리 부족으로 예외가 발생하여 중단된다. 이런 로직은 금기다.
+//		private static void p() throws InterruptedException {
+//			// if(count < 5) {
+//				count++;
+//				
+//				System.out.println("Hello" + count);
+//				//Thread.sleep(500);
+//				p();
+//		//}
+//		}
+//	}
+//
+
+////6-9_3
+//class PrimitiveParamEx2_3 {
+//	static int count = 0;
+//
+//	public static void main(String args[]) throws Exception {
+////		A a1 = new A();
+////		A a2 = new A();
+//		// 객체 생성은 개발자가 직접하지만 사용한 객체의 파괴는 개발자가 하지 않고 가비지 콜렉터가 대신 수행한다.
+//		// 가비지 콜렉터는 힙메모리에 존재하는 객체를 참조하는 변수가 없다면 아무도 사용하지 않는다고 판단하여 파괴하는 작업을 수행한다.
+//		// 가비지 콜렉터의 작업일정은 알 수가 없다.
+//		
+//		p();
+//
+//	}
+//
+//	
+//	// 메소드를 호출할 때마다 그 메소드의 로직 처리를 위한 메모리 공간은 새롭게 할당된다.
+//	private static void p() throws Exception {
+//		if (count < 5) { // 재귀호출은 무한루프에 빠지지 않도록 반드시 무한루프를 벗어나는 로직이 필요하다.
+//			count++;
+//			
+//			System.out.println("Hello "+count);
+//			Thread.sleep(500);
+//			p();	// 재귀호출
+//		}
+//
+//	}
+//}
+
+
+
+////6-10
+//// class Data { int x; }
+//
+//class ReferenceParamEx {
+//	public static void main(String[] args) {
+//
+//		Data d = new Data();
+//		d.x = 10;
+//		System.out.println("main() : x = " + d.x);
+//
+//		change(d);
+//		System.out.println("After change(d)");
+//		System.out.println("main() : x = " + d.x);
+//
+//	}
+//
+//	static void change(Data d) { // 참조형 매개변수
+//		d.x = 1000;
+//		System.out.println("change() : x = " + d.x);
+//	}
+//}
+//
+
+
+////6-15
+//class FactorialTest {
+//	public static void main(String args[]) {
+//		
+//		// 문제 : 1 * 2 * 3 * 4 * 5의 결과를 구하시오.
+//		// 4! = 4 * 3 * 2 * 1 
+//		int result = factorial(4);  // int result = FactorialTest.factorial(4);
+//
+//		System.out.println(result);
+//	}
+///*
+// * factorial(n)
+// * 4
+// * factorial(4)
+// * 
+// * n*factorial (n-1)
+// * 4*factorial (4-1) >> 4 * 6 >> return 24
+// * 3*factorial (3-1) >> 3 * 2 >> return 6
+// * 2*factorial (2-1) >> 2 * 1 >> return 2
+// * 	return 1;
+// * 
+//	*/
+//	static int factorial(int n) {
+//		int result=0;
+//
+//		if ( n == 1) {
+//			result = 1;		
+//		} else {
+//			result = n * factorial(n-1);		// 다시 메서드 자신을 호출한다.
+//		}
+//
+//		return result;
+//	}
+//}
+
+
+////6-18
+//class PowerTest { 
+//	// 재취호출 : 구글입사 희망자! 
+//	public static void main(String[] args) { 
+//		
+//		System.out.println(power(2,1));  // 2 ^ 1 = 2 
+//		System.out.println(power(2,2));  // 2 ^ 2 = 4 
+//		System.out.println(power(2,3));  // 2 ^ 3 = 2*2*2= 8  
+//		
+//		
+////		int x = 2; 
+////		int n = 5; 
+////		long result = 0; 
+////
+////		for(int i=1; i<=n; i++) { 
+////			result += power(x, i); 
+////		} 
+////
+////		System.out.println(result); 
+//	} 
+//
+//	static long power(int x, int n) { 
+//		if(n==1) return x; {
+//		}
+//		return x * power(x, n-1);
+//		/*
+//		 * x  power(2,3)으로 시작
+//		 * 2 * power(2, 2);  >> 2*2*2
+//		 * 2 * power(2, 1);  >> 2*2
+//		 * return 2;
+//		 * 
+//		 */
+//	} 
+//}
+
+////6-19
+//class MyMath2 {
+//	long a, b;
+//	
+//	// 인스턴스변수 a, b만을 이용해서 작업하므로 매개변수가 필요없다.
+//	long add() 	    { return a + b; }  // a, b는 인스턴스변수
+//	long subtract() { return a - b; }
+//	long multiply() { return a * b; }
+//	double divide() { return a / b; }
+//
+//	// 인스턴스변수와 관계없이 매개변수만으로 작업이 가능하다.
+//	static long   add(long a, long b) 	   	 { return a + b; } // a, b는 지역변수
+//	static long   subtract(long a, long b)   { return a - b; }
+//	static long   multiply(long a, long b)	 { return a * b; }
+//	static double divide(double a, double b) { return a / b; }
+//}
+//
+//class MyMathTest2 {
+//	public static void main(String args[]) {
+//		// 클래스메서드 호출. 인스턴스 생성없이 호출가능
+//		System.out.println(MyMath2.add(200L, 100L));
+//		System.out.println(MyMath2.subtract(200L, 100L));
+//		System.out.println(MyMath2.multiply(200L, 100L));
+//		System.out.println(MyMath2.divide(200.0, 100.0));
+//
+//		MyMath2 mm = new MyMath2(); // 인스턴스를 생성
+//		mm.a = 200L;
+//		mm.b = 100L;
+//		// 인스턴스메서드는 객체생성 후에만 호출이 가능함.
+//		System.out.println(mm.add());
+//		System.out.println(mm.subtract());
+//		System.out.println(mm.multiply());
+//		System.out.println(mm.divide());
+//	}
+//}
+
+
+////6-21
+//class OverloadingTest {
+//	public static void main(String args[]) {
+//		MyMath3 mm = new MyMath3();
+//		
+//		System.out.println("mm.add(3, 3) 결과:"    + mm.add(3,3));
+//		System.out.println("mm.add(3L, 3) 결과: "  + mm.add(3L,3));
+//		System.out.println("mm.add(3, 3L) 결과: "  + mm.add(3,3L));
+//		System.out.println("mm.add(3L, 3L) 결과: " + mm.add(3L,3L));
+//
+//		int[] a = {100, 200, 300};
+//		System.out.println("mm.add(a) 결과: " + mm.add(a));
+//		
+//		System.out.println(mm.add(1,2,3));
+//   }
+//}
+//
+//class MyMath3 {
+//	int add(int a, int b) {
+//		System.out.print("int add(int a, int b) - ");
+//		return a+b;
+//	}
+//	
+//	long add(int a, long b) {
+//		System.out.print("long add(int a, long b) - ");
+//		return a+b;
+//	}
+//	
+//	long add(long a, int b) {
+//		System.out.print("long add(long a, int b) - ");
+//		return a+b;
+//	}
+//
+//	long add(long a, long b) {
+//		System.out.print("long add(long a, long b) - ");
+//		return a+b;
+//	}
+//
+////	int add(int[] a) {		// 배열의 모든 요소의 합을 결과로 돌려준다.
+////		System.out.print("int add(int[] a) - ");
+////		int result = 0;
+////		for(int i=0; i < a.length;i++) {
+////			result += a[i];
+////		}	
+////		return result;
+////	}
+//	
+//	// 자료형... : varargs, 가변형 파라미터  
+//	int add(int... a) {		// int 형 다수의 파라미터를 받아서 int[] a에 할당한다.
+//		System.out.print("#5 >> int add(int[] a) - ");
+//		int result = 0;
+//		for(int i=0; i < a.length;i++) {
+//			result += a[i];
+//		}	
+//		return result;
+//	}
+//}
+
+////6-23
+//class Data1 {
+//	int value;
+//}
+//
+//class Data2 {
+//	int value;
+//
+//	Data2(int x) { 	// 매개변수가 있는 생성자.
+//		value = x;
+//	}
+//}
+//
+//class ConstructorTest {
+//	public static void main(String[] args) {
+//		Data1 d1 = new Data1();
+//		Data2 d2 = new Data2();		// compile error발생
+//	}
+//}
+
+
+2018/08/14
+
+자바수업_코드 _ 1
+
+////0-1
+//package ch06;
+//
+//import java.util.Arrays;
+//
+//
+//public class test {
+//	public static void main(String[] args) {
+//		// 과제 : 미완성된 메소드 2개를 완성하시오.
+//		
+//		int[] ary = makeArray(10); // 정수 10개를 담고 있는 배열을 리턴하는 메소드
+//		
+//	
+//		System.out.println(Arrays.toString(ary));
+//		// 출력결과
+//		// [1,2,3,4,5,6,7,8,9,10]
+//		
+//		
+//		int operand = 10;
+//		ary = evenItemsMultiply(ary, operand);
+//		
+//		System.out.println(Arrays.toString(ary));
+//		
+//		// 출력결과
+//		// [1,20,3,40,5,60,7,80,9,100]
+//	}
+//	
+//	static int[] makeArray(int length) {
+//		
+//		int[] nums = new int[length];
+//		for (int i = 0; i < nums.length; i++) {
+//			nums[i] = i+1;
+//		}
+//		
+//		return nums;
+//	}
+//	
+//	private static int[] evenItemsMultiply(int[] ary, int operand) {
+//		
+//		for(int i= 0; i<ary.length;i++) {
+//			
+//			if(ary[i]%2==0)
+//			ary[i] = ary[i] * operand;
+//		}
+//		
+//		
+//		return ary;
+//		
+//		
+//	}
+//	
+//
+//	
+//}
+
+
+////0-2
+////	프로그램을 실행하면 콘솔에 다음처럼 출력하도록 createArray(length, startNumber) 메소드를
+////	완성하세요.
+//
+////	[10, 11, 12, 13, 14]
+//import java.util.Arrays;
+//
+//public class Test2 {
+//
+//		public static void main(String[] args) {
+//			
+//			int length = 5;
+//			int startNumber = 10;
+//			
+//			int[] ary = createArray(length, startNumber);
+//			
+//			System.out.println(Arrays.toString(ary));
+//		}
+//		
+//		// 반환 자료형 타입 이름 매개변수
+//		static int[] createArray(int length, int startNumber) {
+//			
+//			int[] a = new int[length];
+//			
+//			for(int i=0; i<5;i++) {
+//				a[i] = startNumber+i;
+//			}
+//			
+//			return a;
+//		}
+//		
+//
+//}
+//
+
+0-3/0-4 같은패키지 이용 
+////0-3
+////ArrayManager 클래스의 findMaxNumber() 메소드는 현재 미완성입니다.
+////
+////메소드가 ArrayManager 객체가 가진 2차원 배열에서 가장 큰 정수를 구해서 리턴하도록
+////코드를 완성하세요.
+//
+//
+//public class Test3 {
+//
+//		public static void main(String[] args) {
+//			ArrayManager am = new ArrayManager(4);
+//			
+//			am.print();
+////			출력결과
+////			[0, 0, 0, 0]
+////			[0, 0, 0, 0]
+////			[0, 0, 0, 0]
+////			[0, 0, 0, 0]
+//					
+//			int[][] ary = {
+//				{3, 2, 1},
+//				{6, 5, 4},
+//				{9, 8, 7}
+//			};
+//			
+//			am.setAry(ary);	
+//			am.print();
+////			[3, 2, 1]
+////			[6, 5, 4]
+////			[9, 8, 7]
+//			
+//			int maxNumber = am.findMaxNumber();
+//			System.out.println("Max number is " + maxNumber);
+////			Max number is 9
+//		}
+//
+//	}
+//	
+
+////0-4
+//import java.util.Arrays;
+//
+//public class ArrayManager {
+//	
+//
+//		private int[][] ary;
+//
+//		public ArrayManager() {}
+//
+//		public ArrayManager(int length) {
+//			ary = new int[length][length];
+//		}
+//
+//		public int[][] getAry() {
+//			return ary;
+//		}
+//
+//		public void setAry(int[][] ary) {
+//			this.ary = ary;
+//		}
+//
+//		public int findMaxNumber() {
+//			
+//			// 여기에 코드를 작성하세요.
+//			   int max = ary[0][0];
+//	
+//			for (int i = 0; i<3; i++) {
+//				for (int j=0; j<3; j++) {
+//					  if (ary[i][j] > max)
+//						  max = ary[i][j];
+//
+//				}
+//			}
+//			
+//			return max;
+//		}
+//
+//		public void print() {
+//			for (int i = 0; i < ary.length; i++) {
+//				System.out.println(Arrays.toString(ary[i]));
+//			}
+//		}
+//	}
+//
+//
+//
+
+
+
+////0-5
+//public class TextReturn {
+//	
+//	public static void main(String[] args) {
+//		
+//		int a = 10; // int는 4바이트
+//		short b  = (short)a; // short는 2바이트
+//		long c = a; // long은 8바이트 
+//		
+//		System.out.println(TextReturn.add(2,3));
+//		System.out.println(add(2,3)); // 이용하는 로직이 제공하는 로직과 하나의 클래스내에 존재 할 때 클래스명을 생략이 가능하다.
+//	
+//		print("Hello World!!!!!!!!!!");
+//		print("");
+//	}
+//						// 메소드명 + 파라미터
+//						// print(String string)  이부분이 시그너처 
+//	private static void print(String string) {
+//		if (string.equals("")) { // 빈문자열 일 때 화면 출력작업을 하지 않는다.
+//			return; //  메소르 로직처리를 끝내라. (여기서 코드수행을 멈춰라.)
+//		}
+//		
+//		System.out.println("==========================");
+//		System.out.println(string);
+//		System.out.println("==========================");
+//		
+//	}
+//
+//	static short  add(int i , int  j) {
+//
+////		int result = i + j;
+////		return result;
+//		
+//		return (short) ( i + j );
+//	}
+//	
+//	
+//	
+//}
+
+////0-6
+//
+//public class P278 {
+//	// #1 : 변수에 static 을 붙이면 static 메소드에서 사용할수 있게 된다.
+//	// 프로그램 시작시 (main메소드 보다 앞서서) 자동으로 메모리 처리가 되고 프로그램이 끝날때까지 유지된다. >> 전역변수, 공유변수
+//	// final : 최초 할당만 가능하고 재할당은 불가능하게 만드는 키워드 
+//	static final double PI = 3.141592;
+//	
+//	static String name = "홍길동";
+//	
+//	public static void main(String[] args) {
+//		System.out.println(Math.PI)
+//		;
+//		say();
+//	}
+//
+//	private static void say() {
+//		// TODO Auto-generated method stub
+//		
+//		// Cannot make a static reference to the non-static field(멤버변수) name
+//		// 비정적 필드 이름에 대한 정적 참조를 만들수 없습니다.
+//		// static메소드내에서 non-static변수를 사용할수없다.
+//		// 메소드는 static 키워드를 붙여서 메모리에 존재하여 기동할수 있는데, 그 메소드에서 사용하고자 하는
+//		// 변수 name은 static키워드가 없어서 메모리에 존재하지 않고 따라서 사용할 수 없는 상태이다.
+//		// 즉 메모리가 없어서 못씀 
+//		System.out.println("안녕하세요 " + name + " 님!");
+//	}
+//}
+
+////0-7
+//
+//public class P278_1 {
+//	
+//	static String name = "홍길동";
+//	
+//	public static void main(String[] args) {
+//	
+//		say();
+//	}
+//
+//	private static void say() {
+//		// #2 가장일반적인 방법 
+//		P278_1 p = new P278_1();
+//		
+//		
+//		System.out.println("안녕하세요 " + p.name + " 님!");
+//	}
+//}
+
+
+////0-8
+//
+//public class P291 {
+//	public static void main(String[] args) {
+//	
+//		Superman s = new Superman(); // new 클래스 생성자중의 하나 (전달할 파라미터)
+//		Superman s2 = new Superman("Clark");
+//		
+//		// 객체를 생성하는 시점에 객체의 멤버변수 네임에 할당할 값을 전달하면서 새 객체를 만드는 방법이다.
+//	}
+//}
+//
+//class Spiderman{
+//	// 생성자를 아무것도 명시하지 않으면 컴파일러가 자동으로 디폴트 생성자를 추가해 준다.
+//	// public Spiderman() {}
+//}
+//
+//class Superman extends Object {
+//	String name;
+//
+//	// 생성자 : new 연산자로 객체를 생성할때 처리해야 하는 코드를 위한 일종의 메소드이다.
+//	// 대문자로 시작한다. 이름은 클래스명과 동일해야 한다.
+//	// 생성자명 앞에 리턴자료형 표기가 없다.
+//	public Superman() {
+//		System.out.println("Superman() called.");
+//		
+//	}
+//	public Superman(String name) {
+//		super(); // super는 부모객체를 지칭하는 키워드, super() 부모 클래스의 디폴트 생성자를 호출
+//		this.name = name; // this는 객체 자기자신을 지칭하는 키워드
+//		System.out.println("Superman(String name) called.");
+//	}
+//	
+//	
+//}
+
+
+
+

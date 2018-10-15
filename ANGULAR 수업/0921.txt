@@ -1,0 +1,18 @@
+student.json
+
+{
+[
+
+{"id":1, "name":"A"},
+
+
+]
+
+}
+
+1.student-model.ts
+2.student-http.service.ts
+3.student-component.ts 과 친구들
+4.루트 컴포넌트에 배치
+
+ 

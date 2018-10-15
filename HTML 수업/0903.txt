@@ -1,0 +1,16 @@
+www.backlong.com/git-tutorial/kr
+누구나 쉽게 이해할수 있는 GIT  입문 
+
+취업용 
+a-guide-to-using-github-pages/ 
+
+프로 깃 2 한글 pdf
+
+학습때 GUI 쓰지 말것 
+
+powerShell 마이크로 소프트가 리눅스개발자를 위한 콘솔
+
+인덱스에 등록 또는 스테이징 
+
+markdown 사용법
+https://gist.github.com/ihoneymon/652be052a0727ad59601

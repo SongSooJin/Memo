@@ -1,0 +1,5 @@
+2018/09/11
+
+See Console for more info. (Open View -> Developer -> Toggle Developer Tools)
+
+text-decoration : line - through

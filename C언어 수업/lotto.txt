@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int main(void) {
+	int num[6];
+	int lotto[6];  //  = { 1,2,3,4,5,6 };
+	int bonus = 0;
+	int count = 0; //맞춘 개수
+	int b_count; //보너스 번호를 맞춰는지 검사
+	int i, j;
+	srand((unsigned int)time(NULL)); //시간에 따라 seed 값 변경
+
+	//사용자 입력 번호 저장
+	for (i = 0; i<6; i++) {
+		printf("%d 번째 번호를 입력하세요. : ", i + 1);
+		scanf_s("%d", &num[i]);
+		if (num[i]<1 || num[i]>45) {
+			printf("번호는 1부터 45까지만 입력해야 합니다.\n");
+			i--;
+			continue;
+		}
+		if (i>0) {
+			for (j = 0; j<i; j++) {
+				if (num[i] == num[j]) {
+					printf("번호는 중복 되어서는 안됩니다.\n");
+					i--;
+					continue;
+				}
+			}
+		}
+	}
+	//당첨 번호 저장
+	for (i = 0; i<6; i++) {
+		lotto[i] = (rand() * 100) % 45 + 1;
+		if (i>0) {
+			for (j = 0; j<i; j++) {
+				if (lotto[i] == lotto[j]) {
+					i--;
+				}
+				continue;
+			}
+		}
+	}
+	//보너스 번호 만드는 문장
+	for (i = 0; i<1; i++) {
+		bonus = (rand() * 100) % 45 + 1;
+		for (j = 0; j <6; j++) {
+			if (bonus == lotto[j]) {
+				i--;
+				continue;
+			}
+		}
+	}
+	printf("\n**************************************\n");
+	printf("*당첨 번호 : *");
+	for(j = 0; j <6; j++) {
+		printf("lotto[%d]=%d  ", j, lotto[j]);
+	}
+	printf("\n");
+	printf("  *보너스 : %3d*", bonus);
+	printf("\n**************************************\n");
+	printf("*응모하신번호 : *");
+	for (j = 0; j <6; j++) {
+		printf("num[%d]=%2d  ", j, num[j]);
+	}
+	printf("\n");
+	printf("\n**************************************\n");
+
+	// 맞춘 개수 검사
+	for (i = 0; i<6; i++) {
+		for (j = 0; j<6; j++) {
+			if (num[i] == lotto[j])
+				count++;
+		}
+	}
+	//보너스 맞췄는지 검사
+	for (i = 0; i<6; i++) {
+		if (num[i] == bonus)
+			b_count = 1;
+	}
+	if (count == 3) {
+		printf("5등에 당첨되었습니다\n");
+	}
+	else if (count == 4) {
+		printf("4등에 당첨되었습니다\n");
+	}
+	else if ((count == 5) && (b_count == 1)) {
+		printf("2등에 당첨되었습니다\n");
+	}
+	else if (count == 5) {
+		printf("3등에 당첨되었습니다\n");
+	}
+	else if (count == 6) {
+		printf("1등에 당첨되었습니다\n");
+	}
+	else {
+		printf("\n꽝 다음 기회에\n");
+	}
+
+	system("pause");
+	return 0;
+}

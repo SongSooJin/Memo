@@ -1,0 +1,17 @@
+2018/07/27
+
+#include<stdio.h>
+
+int main(void) {
+
+printf("c:\\work \n");
+printf("Hello c world \n");
+printf("sw \" 응용\" 2기 \n");
+system("pause");
+printf("안녕하세요 저는 박성효입니다. \n");
+printf("연락처 010 7919 3575 \n");
+printf("메일주소 parksh-7@daum.net \n");
+system("pause");
+
+return 0;
+}

@@ -1,0 +1,88 @@
+2018/09/19
+
+CLI, Command line interface : 
+
+>npm i -g @angular/cli
+>ng help
+>ng new angular-cli-example
+:angular-cli-example 파일을 만들꺼야
+>npm start
+
+걸프 : 파일들을 합침 ,빌드도구
+
+앵귤러가 선택 => webpack
+
+
+.ts == .html(.js) ==> Browser
+
+개발중에는 실제파일은 만들지 않고
+메모리에 해당 파일 정보를 유지하면 보다 빠르게
+브라우저에게 재 배포 할 수있다.
+
+npm start ==> ng serve ==> @angular/cli
+==> babel 트랜스파일링,webpack빌딩 ==> 
+webpack-dev-server
+
+webpack 빌딩결과
+
+<script type="text/javascript" src="runtime.js"></script>
+
+<script type="text/javascript" src="polyfills.js"></script>
+
+<script type="text/javascript" src="styles.js"></script>
+
+<script type="text/javascript" src="vendor.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+
+개발자가 작성한 코드가 main.js안에 위치한다.
+
+브라우저가 main.js를 처리하면 동적으로 HTML 엘리먼트가 밑으로 배치된다.
+
+
+webpack-dev-server <== http://localhost:4200/
+브라우저 접근
+webpack-dev-server <== index.html 배포 to 브라우저 접근
+
+
+앵귤러는 코드를 레고블록처럼 모두 모듈화 하여 사용한다.
+모듈은 다수가 쓸수 있으며 시작하는 기동 모듈을 한개만
+지정할 수 있다.
+
+개발자 로직의 처리 순서
+main.ts ==> AppModule ==> AppComponent
+
+component
+1. HTML
+2. CSS
+3. JavaScritpt
+: 격리되어있음 
+앵귤러는 재활용하지 않음
+서비스같은 객체로 값을 전달해놔야(백업) 값이 날라가지 않음
+
+일반 함수 선언
+function x(){
+	arguments
+}.prototype
+
+Arrow 함수 선언
+() => {
+
+}
+
+다운그레이드 불가
+: 대신 prototype객체에 동적으로 기능 추가 
+=> 폴리필 
+
+
+서버가 html을 주면 전체화면이 리프레쉬된다.
+
+서버가 데이터만 주면 데이터를 자바스크립트가 
+받아서 코드적으로 변경하면 해당 부분만 리프레쉬 된다.
+
+브라우저의 리프에쉬가  돌면 전체 바뀜 안돌면 부분만 바뀜
+
+명령창에 
+ng new angular-simple-demo2 입력 => 실행 
+기존 프로젝트과 비교해 가면서 하나씩 코드 추가
+하고 화면 갱신상태 확인 

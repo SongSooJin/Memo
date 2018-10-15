@@ -1,0 +1,783 @@
+2018/08/24
+
+자바수업_코드
+
+////11-20
+//import java.util.*;
+//
+//class HashSetEx1 {
+//	public static void main(String[] args) {
+//		Object[] objArr = {
+//				"1",new Integer(1),
+//				"2", "2", "3", "3", "4", "4", "4" 
+//				};
+//		
+//		Set<Object> set = new HashSet<Object>();
+//
+//		for(int i=0; i < objArr.length; i++) {
+//			set.add(objArr[i]);	// HashSet에 objArr의 요소들을 저장한다.
+//		}
+//             // HashSet에 저장된 요소들을 출력한다.
+//		System.out.println(set);	
+//	
+//		
+//		Iterator<Object> iter = set.iterator();
+//		while (iter.hasNext()) {
+//			Object value = iter.next();
+//			
+//			if (value instanceof String) {
+//				System.out.println("String");
+//			}
+//			else if (value instanceof Integer) {
+//				System.out.println("Integer");
+//			}
+//			else {
+//			System.out.println("Else");
+//			}
+//			
+//		}
+//		
+//		System.out.println(" ");
+//		
+//		Object[] data = set.toArray();
+//		for (int i = 0; i < data.length; i++) {
+//			System.out.print(data[i] +  " ");
+//			
+//			if (data[i] instanceof String) {
+//				System.out.println("String");
+//			}
+//			else if (data[i] instanceof Integer) {
+//				System.out.println("Integer");
+//			}
+//			else {
+//			System.out.println(data[i]);
+//			}
+//		}
+//		
+//	}
+//}
+
+
+////11-23
+//import java.util.*;
+//
+//class HashSetEx3 {
+//	public static void main(String[] args) {
+//		HashSet<Object> set = new HashSet<Object>();
+//
+//		set.add("abc"); 	// 보관
+//		set.add("abc");	// 보관하지 않는다. 이미 같은 문자열 객체가 존재
+//		set.add(new Person("David",10));
+//		set.add(new Person("David",10));
+//
+//		System.out.println(set);
+//	}
+//}
+//
+//class Person {
+//	String name;
+//	int age;
+//
+//	Person(String name, int age) {
+//		this.name = name;
+//		this.age = age;
+//	}
+//
+//	public String toString() {
+//		return "{"+name +":"+ age+"}";
+//	}
+//}
+
+
+////11-24
+//import java.util.*;
+//
+//class HashSetEx4 {
+//	public static void main(String[] args) {
+//		HashSet<Object>set = new HashSet<Object>();
+//
+//		set.add(new String("abc"));
+//		set.add(new String("abc"));
+//		set.add(new Person2("David",10));
+//		set.add(new Person2("David",10));
+//		
+//		Person2 p1 = new Person2("David",10);
+//		Person2 p2 = new Person2("David",10);
+//		System.out.println(p1.equals(p2));
+//		System.out.println(p1.hashCode());
+//		System.out.println(p2.hashCode());
+//
+//		System.out.println(set);
+//	}
+//}
+//
+//	class Person2 extends Object{
+//		String name;
+//		int age;
+//
+//	Person2(String name, int age) {
+//		this.name = name;
+//		this.age = age;
+//	}
+//
+//	// set 중복을 체크할 때 객체의 equals, hashCode 메소드를 호출하여
+//	// 그 결과로 증보여부를 체크합니다.
+//	// 콜렉션에서 이 설계도로 만든 객체를 보관 할 때,
+//	// 객체가 가진 상태값이 같다면(동등하다면) 이러한 객체를 1개만 보관하면 될 때,
+//	// 중복데이터를 가진 객체를 추가로 저장하지 않기 위하여 
+//	// equals, hashCode 메소드를 재정의 하시면 됩니다.
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(obj instanceof Person2) {
+//			Person2 tmp = (Person2)obj;
+//			return name.equals(tmp.name) && age==tmp.age;
+//		}
+//
+//		return false;
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		// String 클래스의 hashCode 메소드값이 같으면 해쉬코드
+//		// 숫자를 리턴하도록 재정의 되어 있다
+//		return (name+age).hashCode();  
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "{"+name +":"+ age+"}";
+//	}
+//}
+
+
+////11-35
+//import java.util.*;
+//
+//class PropertiesEx1 {
+//	public static void main(String[] args) {
+//		Properties prop = new Properties();
+//
+//  Properties = 항상 Strind / hashmap = 개발자가 값을 지정할 수 잇음 
+//		// prop에 키와 값(key, value)을 저장한다.
+//		prop.setProperty("timeout","30");
+//		prop.setProperty("language","kr");
+//		prop.setProperty("size","10");
+//		prop.setProperty("capacity","10");
+//
+//		// prop에 저장된 요소들을 Enumeration을 이용해서 출력한다.
+//		Enumeration<?> e = prop.propertyNames();
+//
+//		while(e.hasMoreElements()) {
+//			String key = (String)e.nextElement();
+//			System.out.println(key + "="+ prop.getProperty(key));
+//		}
+//
+//		System.out.println();
+//		prop.setProperty("size","20");	// size의 값을 20으로 변경한다.
+//		System.out.println("size="       + prop.getProperty("size"));
+//		System.out.println("capacity="   + prop.getProperty("capacity", "20"));
+//		System.out.println("loadfactor=" + prop.getProperty("loadfactor", "0.75"));
+//
+//		System.out.println(prop);	// prop에 저장된 요소들을 출력한다.
+//		prop.list(System.out);      // prop에 저장된 요소들을 화면(System.out)에 출력한다.
+//	}
+//}
+
+
+////13-1
+//class ThreadEx01 {
+//	public static void main(String args[]) {
+//		ThreadEx1_1 t1 = new ThreadEx1_1();
+//
+//		Runnable r  = new ThreadEx1_2();
+//		// ThreadEx1_2 클래스 내에는 start() 메소드가 없으므로
+//		// Thread 클래스의 도움을 받아서 처리해야 합니다.
+//		Thread   t2 = new Thread(r);	  // 생성자 Thread(Runnable target)
+//
+//		t1.start(); 	 // 개별적인 콜스택이 만들어진 후 run 메소드가 수행된다
+//		t2.start();
+//		// Thread 클래스의 생성자에 Runnable 구현체를 전달하면
+//		// Thread객체는 start() 메소드 호출 시
+//		// 콜스택이 만들고 난 후 Runnable 구현체의 run()메소드를 수행합니다.
+//	}
+//}
+//
+//class ThreadEx1_1 extends Thread {
+//	// 재정의 
+//	@Override
+//	public void run() {
+//		// 별도의 쓰레드가 처리해야 할 로직을 배치합니다
+//		for(int i=0; i < 5; i++) {
+//			System.out.println(getName()); // 조상인 Thread의 getName()을 호출
+//		}
+//	}
+//}
+//
+//class ThreadEx1_2 extends Object implements Runnable {
+//	@Override	
+//	public void run() {
+//		for(int i=0; i < 5; i++) {
+//			// 조상인 Thread의 getName()
+//			// Thread.currentThread() - 현재 실행중인 Thread를 반환한다.
+//		    System.out.println(Thread.currentThread().getName());
+//		}
+//	}
+//}
+
+
+////13-2
+// class ThreadEx02 {
+//	public static void main(String args[]) throws Exception {
+//		ThreadEx2_1 t1 = new ThreadEx2_1();
+//		t1.start();
+//		System.out.println("Done.");
+//	}
+//}
+//
+//class ThreadEx2_1 extends Thread {
+//	public void run() {
+//		throwException();
+//	}
+//
+//	public void throwException() {
+//		try {
+//			throw new Exception();		
+//		} catch(Exception e) {
+//			e.printStackTrace();	
+//		}
+//	}
+//}
+
+
+////13-4
+// class ThreadEx04 {
+//	public static void main(String args[]) {
+//		long startTime = System.currentTimeMillis();
+//
+//		for(int i=0; i < 500; i++)
+//			System.out.printf("%s", new String("-"));		
+//
+//		System.out.println(" ");
+//		System.out.print("소요시간1:" +(System.currentTimeMillis()- startTime)); 
+//
+//		for(int i=0; i < 500; i++) 
+//			System.out.printf("%s", new String("|"));		
+//		
+//		System.out.println(" ");
+//		System.out.print("소요시간2:"+(System.currentTimeMillis() - startTime));
+//	}
+//}
+//
+
+
+////13-6
+//import javax.swing.JOptionPane;
+//
+//class ThreadEx06 {
+//	public static void main(String[] args) throws Exception{
+//		System.out.println("START");
+//		
+//		String input = JOptionPane.showInputDialog("아무 값이나 입력하세요."); 
+//		System.out.println("입력하신 값은 " + input + "입니다.");
+//
+//		for(int i=10; i > 0; i--) {
+//			System.out.println(i);
+//			try {
+//				Thread.sleep(1000);
+//			} catch(Exception e ) {}
+//		}
+//	}
+//}
+
+
+////13-7
+//import javax.swing.JOptionPane;
+//
+//class ThreadEx07 {
+//	public static void main(String[] args) throws Exception 	{
+//		ThreadEx7_1 th1 = new ThreadEx7_1();
+//		th1.start();
+//
+//		String input = JOptionPane.showInputDialog("아무 값이나 입력하세요."); 
+//		System.out.println("입력하신 값은 " + input + "입니다.");
+//	}
+//}
+//
+//class ThreadEx7_1 extends Thread {
+//	public void run() {
+//		for(int i=10; i > 0; i--) {
+//			System.out.println(i);
+//			try {
+//				sleep(1000);
+//			} catch(Exception e ) {}
+//		}
+//	}
+//}
+
+
+////13-10
+// class ThreadEx10 implements Runnable  {
+//	static boolean autoSave = false;
+//
+//	public static void main(String[] args) {
+//		Thread t = new Thread(new ThreadEx10());
+//		t.setDaemon(true);		// 이 부분이 없으면 종료되지 않는다.
+//		t.start();
+//
+//		for(int i=1; i <= 15; i++) {
+//			try{
+//				Thread.sleep(1000);
+//			} catch(InterruptedException e) {}
+//			System.out.println(i);
+//			
+//			if(i==5)
+//				autoSave = true;
+//		}
+//
+//		System.out.println("프로그램을 종료합니다.");
+//	}
+//
+//	@Override
+//	public void run() {
+//		while(true) { // 무한루프
+//			try { 
+//				Thread.sleep(3 * 1000);	// 3초마다
+//			} catch(InterruptedException e) {}	
+//
+//
+//			// autoSave의 값이 true이면 autoSave()를 호출한다.
+//			// 스레드끼리 직접적인 대화는 안됨
+//			//
+//			if(ThreadEx10.autoSave) {
+//				autoSave();
+//				// break 문으로 while문을 종료하는 로직이 필요없는 이유는
+//				// 데몬스레드 수행하기 때문이다. 데몬스레드는 일반 스레드가
+//				// 종료되면 존재의미가 없기 때문에 자동으로 종료됩니다.
+//				
+//			}
+//		}
+//	}
+//
+//	public void autoSave() {
+//		System.out.println("작업파일이 자동저장되었습니다.");
+//	}
+//}
+
+
+////13-12
+// class ThreadEx12 {
+//	public static void main(String args[]) {
+//		ThreadEx12_1 th1 = new ThreadEx12_1();
+//		ThreadEx12_2 th2 = new ThreadEx12_2();
+//
+//		th1.start();
+//		th2.start();
+//
+//		try {
+//			// th1.sleep(2000); 		//이렇게 사용하지 마세요
+//			Thread.sleep(2000);	
+//		} catch(InterruptedException e) {}
+//
+//		System.out.print("<<main 종료>>");
+//	} // main
+//}
+//
+//class ThreadEx12_1 extends Thread {
+//	public void run() {
+//		for(int i=0; i < 300; i++) {
+//			System.out.print("-");
+//		}
+//		System.out.print("<<th1 종료>>");
+//	} // run()
+//}
+//
+//class ThreadEx12_2 extends Thread {
+//	public void run() {
+//		for(int i=0; i < 300; i++) {
+//			System.out.print("|");
+//		}
+//		System.out.print("<<th2 종료>>");
+//	} // run()
+//}
+
+
+////13-13
+//import javax.swing.JOptionPane;
+//
+//class ThreadEx13 {
+//	public static void main(String[] args) throws Exception 	{
+//		ThreadEx13_2 th1 = new ThreadEx13_2();
+//		th1.start();
+//
+//		String input = JOptionPane.showInputDialog("아무 값이나 입력하세요."); 
+//		System.out.println("입력하신 값은 " + input + "입니다.");
+//		th1.interrupt();   // interrupt()를 호출하면, interrupted상태가 true가 된다.
+//		System.out.println("isInterrupted():"+ th1.isInterrupted()); // true
+//	}
+//}
+//
+//class ThreadEx13_2 extends Thread {
+//	public void run() {
+//		int i = 10;
+//
+//		while(i!=0 && !isInterrupted()) {
+//			System.out.println(i--);
+//			for(long x=0;x<2500000000L;x++); // 시간 지연
+//		}
+//
+//		System.out.println("카운트가 종료되었습니다.");
+//	} // main
+//}
+
+
+////13-18
+//class ThreadEx18 {
+//	public static void main(String args[]) {
+//		ThreadEx18_1 th1 = new ThreadEx18_1("*");
+//		ThreadEx18_1 th2 = new ThreadEx18_1("**");
+//		ThreadEx18_1 th3 = new ThreadEx18_1("***");
+//		th1.start();
+//		th2.start();
+//		th3.start();
+//
+//		try {
+//			Thread.sleep(2000);
+//			th1.suspend();
+//			
+//			Thread.sleep(2000);
+//			th2.suspend();
+//			
+//			Thread.sleep(3000);
+//			th1.resume();
+//			
+//			Thread.sleep(3000);
+//			th1.stop();
+//			th2.stop();
+//			
+//			Thread.sleep(2000);
+//			th3.stop();
+//			
+//			}
+//		catch (InterruptedException e) {}
+//	}
+//}
+//
+//class ThreadEx18_1 implements Runnable {
+//	boolean suspended = false;
+//	boolean stopped   = false;
+//
+//	Thread th;
+//
+//	ThreadEx18_1(String name) {
+//		th = new Thread(this, name); 
+//		// th.setName(name);
+//		// Thread(Runnable r, String name)
+//	}
+//
+//	public void run() {
+//		String name =th.getName();
+//
+//		while(!stopped) {
+//			if(!suspended) {
+//				// suspended == false 인 동안, 아래 로직을 계속해서 처리 
+//				System.out.println(name);
+//				try {
+//					Thread.sleep(1000);
+//				} catch(InterruptedException e) {
+//					System.out.println(name + " - interrupted");
+//				}			
+//			} else {
+//				// suspended == true 가 되면, 아무것도 수행하지 않고 다른 스레드가 바로
+//				// 작업을 수행 할 수 있도록 양보한다.
+//				Thread.yield();
+//			}
+//		}
+//		System.out.println(name + " - stopped");
+//	}
+//
+//	public void suspend() { // 잠시 중단 
+//		suspended = true;
+//		th.interrupt();
+//		System.out.println(th.getName() + " - interrupt() by suspend()");
+//	}
+//
+//	public void resume() { // 다시 시작 
+//		suspended = false;
+//	}
+//
+//	public void stop() {
+//		stopped = true;
+//		th.interrupt();
+//		System.out.println(th.getName() + " - interrupt() by stop()");
+//	}
+//
+//	public void start() {
+//		th.start();
+//	}
+//}
+
+
+////13-21
+//class ThreadEx21 {
+//	public static void main(String args[]) {
+//		Runnable r = new RunnableEx21();
+//		new Thread(r,"A").start(); // ThreadGroup에 의해 참조되므로 gc대상이 아니다.
+//		new Thread(r,"B").start(); // ThreadGroup에 의해 참조되므로 gc대상이 아니다.
+//		
+//	}
+//}
+//
+//class Account {
+//	private int balance = 1000;
+//
+//	public  int getBalance() {
+//		return balance;
+//	}
+//
+//	// A,B 스레드가 순차적으로 withdraw 메소드를 호출하여 사용하는 것이 아니라
+//	// 거의 동시에 접근하여 사용하고 있는 상황
+//	public void withdraw(int money){
+//		if(balance >= money) {
+//			try { Thread.sleep(1000);} catch(InterruptedException e) {}
+//			balance -= money;
+//		}
+//	} // withdraw
+//}
+//
+//class RunnableEx21 implements Runnable {
+//	Account acc = new Account();
+//
+//	public void run() {
+//		String name = Thread.currentThread().getName();
+//		
+//		
+//		while(acc.getBalance() > 0) {
+//			// 100, 200, 300중의 한 값을 임으로 선택해서 출금(withdraw)
+//			int money = (int)(Math.random() * 3 + 1) * 100;
+//			System.out.println(name + ":" + money);
+//			acc.withdraw(money);
+//			System.out.println(name + "balance:"+acc.getBalance());
+//		}
+//	} // run()
+//}
+
+
+////13-22
+//class ThreadEx22 {
+//	public static void main(String args[]) {
+//		Runnable r = new RunnableEx22();
+//		new Thread(r,"A").start();
+//		new Thread(r,"B").start();
+//	}
+//}
+//
+//class Account2 {
+//	private int balance = 1000; // private으로 해야 동기화가 의미가 있다.
+//
+//	public  int getBalance() {
+//		return balance;
+//	}
+//
+//	// synchronized : 동기화 블록, 해당 범위는 한번에 하나의 스레드만 접근이 가능하다.
+//	public synchronized void withdraw(int money){ // synchronized로 메서드를 동기화
+//		if(balance >= money) {
+//			try { Thread.sleep(1000);} catch(InterruptedException e) {}
+//			balance -= money;
+//		}
+//	} // withdraw
+//}
+//
+//class RunnableEx22 implements Runnable {
+//	Account2 acc = new Account2();
+//
+//	public void run() {
+//		while(acc.getBalance() > 0) {
+//			// 100, 200, 300중의 한 값을 임으로 선택해서 출금(withdraw)
+//			int money = (int)(Math.random() * 3 + 1) * 100;
+//			acc.withdraw(money);
+//			System.out.println("balance:"+acc.getBalance());
+//		}
+//	} // run()
+//}
+
+
+////13-23
+//import java.util.ArrayList;
+//
+//class ThreadWaitEx1 {
+//	public static void main(String[] args) throws Exception {
+//		Table table = new Table(); // 여러 쓰레드가 공유하는 객체
+//
+//		new Thread(new Cook(table), "COOK1").start();
+//		
+//		new Thread(new Customer(table, "donut"),  "CUST1").start();
+//		new Thread(new Customer(table, "burger"), "CUST2").start();
+//	
+//		// 0.1초(100 밀리 세컨드) 후에 
+//		Thread.sleep(100);
+//		// 강제 종료시킨다.
+//		System.exit(0);
+//	}
+//}
+//
+//class Customer implements Runnable {
+//	private Table table;
+//	private String food;
+//
+//	Customer(Table table, String food) {
+//		this.table = table;  
+//		this.food  = food;
+//	}
+//
+//	public void run() {
+//		while(true) {
+//			try { Thread.sleep(10);} catch(InterruptedException e) {}
+//			String name = Thread.currentThread().getName();
+//			
+//			if(eatFood())
+//				System.out.println(name + " ate a " + food);
+//			else 
+//				System.out.println(name + " failed to eat. :(");
+//		} // while
+//	}
+//
+//	boolean eatFood() { return table.remove(food); }
+//}
+//
+//class Cook implements Runnable {
+//	private Table table;
+//	
+//	Cook(Table table) {	this.table = table; }
+//
+//	public void run() {
+//		while(true) {
+//			// 임의의 요리를 하나 선택해서 table에 추가한다.
+//			int idx = (int)(Math.random()*table.dishNum());
+//			table.add(table.dishNames[idx]);
+//
+//			try { Thread.sleep(1);} catch(InterruptedException e) {}
+//		} // while
+//	}
+//}
+//
+//class Table {
+//	String[] dishNames = { "donut","donut","burger" }; // donut이 더 자주 나온다.
+//	final int MAX_FOOD = 6;  // 테이블에 놓을 수 있는 최대 음식의 개수
+//	
+//private ArrayList<String> dishes = new ArrayList<>();
+//
+//	public void add(String dish) {
+//		// 테이블에 음식이 가득찼으면, 테이블에 음식을 추가하지 않는다.
+//		if(dishes.size() >= MAX_FOOD)	
+//			return;
+//		dishes.add(dish);
+//		System.out.println("Dishes:" + dishes.toString());
+//	}
+//
+//	public boolean remove(String dishName) {
+//		// 지정된 요리와 일치하는 요리를 테이블에서 제거한다. 
+//		for(int i=0; i<dishes.size();i++) {
+//			// dishes.remove(dishName);
+//			if(dishName.equals(dishes.get(i))) {
+//				dishes.remove(i);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//
+//	public int dishNum() { return dishNames.length; }
+//}
+
+
+////13-24
+//import java.util.ArrayList;
+//
+//class Customer2 implements Runnable {
+//	private Table2 table;
+//	private String food;
+//
+//	Customer2(Table2 table, String food) {
+//		this.table = table;  
+//		this.food  = food;
+//	}
+//
+//	public void run() {
+//		while(true) {
+//			try { Thread.sleep(10);} catch(InterruptedException e) {}
+//			String name = Thread.currentThread().getName();
+//			
+//			if(eatFood())
+//				System.out.println(name + " ate a " + food);
+//			else 
+//				System.out.println(name + " failed to eat. :(");
+//		} // while
+//	}
+//
+//	boolean eatFood() { return table.remove(food); }
+//}
+//
+//class Cook2 implements Runnable {
+//	private Table2 table;
+//	
+//	Cook2(Table2 table) {	this.table = table; }
+//
+//	public void run() {
+//		while(true) {
+//			int idx = (int)(Math.random()*table.dishNum());
+//			table.add(table.dishNames[idx]);
+//			try { Thread.sleep(100);} catch(InterruptedException e) {}
+//		} // while
+//	}
+//}
+//
+//class Table2 {
+//	String[] dishNames = { "donut","donut","burger" };
+//	final int MAX_FOOD = 6;
+//	private ArrayList<String> dishes = new ArrayList<>();
+//
+//	public synchronized void add(String dish) { // synchronized를 추가
+//		if(dishes.size() >= MAX_FOOD)	
+//			return;
+//		dishes.add(dish);
+//		System.out.println("Dishes:" + dishes.toString());
+//	}
+//
+//	public boolean remove(String dishName) {
+//		// this :  스레드가 이용하는 대상 객체 
+//		synchronized(this) {	
+//			while(dishes.size()==0) { // 음식이 테이블에 없으면 
+//				String name = Thread.currentThread().getName();
+//				System.out.println(name+" is waiting.");
+//				try { Thread.sleep(500);} catch(InterruptedException e) {}	
+//			}
+//
+//			for(int i=0; i<dishes.size();i++)
+//				if(dishName.equals(dishes.get(i))) {
+//					dishes.remove(i);
+//					return true;
+//				}
+//		} // synchronized
+//
+//		return false;
+//	}
+//
+//	public int dishNum() { return dishNames.length; }
+//}
+//
+//class ThreadWaitEx2 {
+//	public static void main(String[] args) throws Exception {
+//		Table2 table = new Table2(); // 여러 쓰레드가 공유하는 객체
+//
+//		new Thread(new Cook2(table), "COOK1").start();
+//		new Thread(new Customer2(table, "donut"),  "CUST1").start();
+//		new Thread(new Customer2(table, "burger"), "CUST2").start();
+//	
+//		Thread.sleep(5000);
+//		System.exit(0);
+//	}
+//}
+
+
+
+

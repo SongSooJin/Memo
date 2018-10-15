@@ -1,0 +1,7 @@
+2018/09/12
+
+js moment .js
+https://momentjs.com/
+
+
+항상 현재 파일의 디렉토리

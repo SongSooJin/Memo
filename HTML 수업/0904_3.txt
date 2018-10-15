@@ -1,0 +1,506 @@
+Microsoft Windows [Version 10.0.17134.228]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\TopC290\Documents\송수진\git\work>cd work
+지정된 경로를 찾을 수 없습니다.
+
+C:\Users\TopC290\Documents\송수진\git\work>mkdir test-merge && cd test-merge
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git init
+Initialized empty Git repository in C:/Users/TopC290/Documents/송수진/git/work/test-merge/.git/
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>echo "" >> test.js
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git commit -m "A"
+[master (root-commit) 57e6991] A
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test.js
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git commit -m "B"
+[master 49fd9a2] B
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git log
+commit 49fd9a20be046346f9985ef1445e3a1845fef6b1 (HEAD -> master)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:03:51 2018 +0900
+
+    B
+
+commit 57e699144e34a9ebcf22c40074da20f7d4aa886f
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:02:09 2018 +0900
+
+    A
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git branch bugfix
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git checkout bugfix
+Switched to branch 'bugfix'
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git branch
+* bugfix
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git commit -m "x"
+[bugfix 396b815] x
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git status
+On branch bugfix
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   test.js
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git commit -m "y"
+[bugfix ade24c8] y
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git branch
+* bugfix
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git checkout master
+Switched to branch 'master'
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git checkout master
+Already on 'master'
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git branch
+  bugfix
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git merge bugfix
+Updating 49fd9a2..ade24c8
+Fast-forward
+ test.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git log
+commit ade24c8b7199a035581860c705c51fab3d19221e (HEAD -> master, bugfix)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:11:52 2018 +0900
+
+    y
+
+commit 396b815d4193f48afd35929e04734583b9ed406a
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:08:05 2018 +0900
+
+    x
+
+commit 49fd9a20be046346f9985ef1445e3a1845fef6b1
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:03:51 2018 +0900
+
+    B
+
+commit 57e699144e34a9ebcf22c40074da20f7d4aa886f
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:02:09 2018 +0900
+
+    A
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>git branch
+  bugfix
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>gitk
+
+C:\Users\TopC290\Documents\송수진\git\work\test-merge>cd..
+
+C:\Users\TopC290\Documents\송수진\git\work>cd C:\Users\TopC290\Documents\송수진\git\work\git-page
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git init
+Initialized empty Git repository in C:/Users/TopC290/Documents/송수진/git/work/git-page/.git/
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit -m "first commit"
+[master (root-commit) e6d6c0e] first commit
+ 1 file changed, 12 insertions(+)
+ create mode 100644 index.html
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log
+commit e6d6c0eeeb515681decc25b681c8074aff72236c (HEAD -> master)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:47:22 2018 +0900
+
+    first commit
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit --amend "A"
+error: pathspec 'A' did not match any file(s) known to git.
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git coommit --amend
+git: 'coommit' is not a git command. See 'git --help'.
+
+The most similar command is
+        commit
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit --amend
+[master 9ea7a2d] A
+ Date: Tue Sep 4 11:47:22 2018 +0900
+ 1 file changed, 12 insertions(+)
+ create mode 100644 index.html
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit -m "B"
+[master 7d5b42e] B
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log
+commit 7d5b42e7072655b69b38bc82bad203cce2e006f4 (HEAD -> master)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 12:01:28 2018 +0900
+
+    B
+
+commit 9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:47:22 2018 +0900
+
+    A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git branch bugfix
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git checkout bugfix
+Switched to branch 'bugfix'
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git branch
+* bugfix
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit -m "x"
+[bugfix d508592] x
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit -m "y"
+[bugfix 128e5d9] y
+ 1 file changed, 6 insertions(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log
+commit 128e5d9b65850a07715681826a9d67fe77737782 (HEAD -> bugfix)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 12:10:31 2018 +0900
+
+    y
+
+commit d5085927b69cd08a6958a7ea69e1b0d2e7639621
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 12:07:14 2018 +0900
+
+    x
+
+commit 7d5b42e7072655b69b38bc82bad203cce2e006f4 (master)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 12:01:28 2018 +0900
+
+    B
+
+commit 9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:47:22 2018 +0900
+
+    A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>gitk
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log --pretty=oneline
+128e5d9b65850a07715681826a9d67fe77737782 (HEAD -> bugfix) y
+d5085927b69cd08a6958a7ea69e1b0d2e7639621 x
+7d5b42e7072655b69b38bc82bad203cce2e006f4 (master) B
+9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6 A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git branch
+* bugfix
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git checkout master
+Switched to branch 'master'
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git branch
+  bugfix
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>got add.
+'got'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit -m "c"
+[master fac4b8a] c
+ 1 file changed, 6 insertions(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>gitk
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log --pretty=oneline
+fac4b8a464912a3028a9ef88fda6934a21ec8e85 (HEAD -> master) c
+7d5b42e7072655b69b38bc82bad203cce2e006f4 B
+9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6 A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log
+commit fac4b8a464912a3028a9ef88fda6934a21ec8e85 (HEAD -> master)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 12:18:39 2018 +0900
+
+    c
+
+commit 7d5b42e7072655b69b38bc82bad203cce2e006f4
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 12:01:28 2018 +0900
+
+    B
+
+commit 9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 11:47:22 2018 +0900
+
+    A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git add .
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git commit -m "d"
+[master dc84697] d
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log --pretty=oneline
+dc84697b4deb7dfed53a6ccbdff484816644ca8d (HEAD -> master) d
+fac4b8a464912a3028a9ef88fda6934a21ec8e85 c
+7d5b42e7072655b69b38bc82bad203cce2e006f4 B
+9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6 A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git branch
+  bugfix
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git merge bugfix
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git --version
+git version 2.18.0.windows.1
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>git log --pretty=oneline
+dc84697b4deb7dfed53a6ccbdff484816644ca8d (HEAD -> master) d
+fac4b8a464912a3028a9ef88fda6934a21ec8e85 c
+7d5b42e7072655b69b38bc82bad203cce2e006f4 B
+9ea7a2db78c30ce9f9a00e0fe5c9026cb557b7e6 A
+
+C:\Users\TopC290\Documents\송수진\git\work\git-page>cd..
+
+C:\Users\TopC290\Documents\송수진\git\work>mkdir tutorial
+
+C:\Users\TopC290\Documents\송수진\git\work>cd tutorial
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git init
+Initialized empty Git repository in C:/Users/TopC290/Documents/송수진/git/work/tutorial/.git/
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        myfile.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git add myfile.txt
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git commit -m "first commit"
+[master (root-commit) d5bfd5a] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 myfile.txt
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git log
+commit d5bfd5a7e5455089aaa3ddc02f4aedc7016dd333 (HEAD -> master)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 13:52:49 2018 +0900
+
+    first commit
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch issue1
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+  issue1
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git checkout issue1
+Switched to branch 'issue1'
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+* issue1
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git add myfile.txt
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git commit -m "add 설명을 추가"
+[issue1 f7edadf] add 설명을 추가
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git ckeckout master
+git: 'ckeckout' is not a git command. See 'git --help'.
+
+The most similar command is
+        checkout
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git checkout master
+Switched to branch 'master'
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+  issue1
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git merge issue1
+Updating d5bfd5a..f7edadf
+Fast-forward
+ myfile.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch -d issue1
+Deleted branch issue1 (was f7edadf).
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch issue2
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch issue3
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+  issue2
+  issue3
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git checkout issue2
+Switched to branch 'issue2'
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+* issue2
+  issue3
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git add myfile.txt
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git commit -m"commit의 설명을 추가"
+[issue2 ac7c349] commit의 설명을 추가
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>햣 ㅣㅐㅎ
+'햣'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git log
+commit ac7c3497edadd1913d41e3e5e3d80af66cfb2f71 (HEAD -> issue2)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 14:13:48 2018 +0900
+
+    commit<EC><9D><98> <EC><84><A4><EB><AA><85><EC><9D><84> <EC><B6><94><EA><B0><80>
+
+commit f7edadf0291ad0243540543b1d8058552f410db3 (master, issue3)
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 14:00:41 2018 +0900
+
+    add <EC><84><A4><EB><AA><85><EC><9D><84> <EC><B6><94><EA><B0><80>
+
+commit d5bfd5a7e5455089aaa3ddc02f4aedc7016dd333
+Author: Song Soo jin <thdtnwls93@naver.com>
+Date:   Tue Sep 4 13:52:49 2018 +0900
+
+    first commit
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git checkout issue3
+Switched to branch 'issue3'
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+  issue2
+* issue3
+  master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial> git add myfile.txt
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git commit -m"pull 설명을 추가"
+[issue3 f34eaa1] pull 설명을 추가
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial> git checkout master
+Switched to branch 'master'
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git marge issue2
+git: 'marge' is not a git command. See 'git --help'.
+
+The most similar command is
+        merge
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git merge issue2
+Updating f7edadf..ac7c349
+Fast-forward
+ myfile.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git merge issue3
+Auto-merging myfile.txt
+CONFLICT (content): Merge conflict in myfile.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git branch
+  issue2
+  issue3
+* master
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git merge issue3
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git diff
+diff --cc myfile.txt
+index c4e78c3,8af6fc9..0000000
+--- a/myfile.txt
++++ b/myfile.txt
+@@@ -1,3 -1,3 +1,7 @@@
+  <EC>90><EC><88><AD><EC><9D><B4><EB><8F><84> <EC><9D><B4><ED><95><B4><ED><95><A0> <EC><88><98> <EC><9E><88><EB><8A>
+<94> Git <EB><AA><85><EB><A0><B9><EC><96><B4>
+  add: <EB><B3><80><EA><B2><BD> <EC><82><AC><ED><95><AD><EC><9D><84> <EB><A7><8C><EB><93><A4><EC><96><B4><EC><84><9C>
+<EC><9D><B8><EB><8D><B1><EC><8A><A4><EC><97><90> <EB><93><B1><EB><A1><9D><ED><95><B4><EB><B3><B4><EA><B8><B0>
+++<<<<<<< HEAD
+ +commit: <EC><9D><B8><EB><8D><B1><EC><8A><A4> <EC><83><81><ED><83><9C><EB><A5><BC> <EA><B8><B0><EB><A1><9D><ED><95>
+<98><EA><B8><B0>
+++=======
++ pull: <EC>90><EA><B2><A9> <EC><A0><80><EC><9E><A5><EC><86><8C><EC><9D><98> <EB><82><B4><EC><9A><A9><EC><9D><84> <EA>
+<B0><80><EC><A0><B8><EC><98><A4><EA><B8><B0>
+++>>>>>>> issue3
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git add myfile.txt
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>git commit -m"issue3 브랜치 병합(충돌해결)"
+[master 92373b8] issue3 브랜치 병합(충돌해결)
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>cd
+C:\Users\TopC290\Documents\송수진\git\work\tutorial
+
+C:\Users\TopC290\Documents\송수진\git\work\tutorial>cd..
+
+C:\Users\TopC290\Documents\송수진\git\work>my
