@@ -174,6 +174,16 @@ ALL_ ==> 다른사용자, 예를 들어 TEST1이 만들어서 TEST2에게 권한을 준것
 
 USER_ ==> 내가 만든 오브젝트... 오라클은 기본적으로 만든사람이 모든 권한을 갖는다
 
+예1) 사용자 TEST1이 EMP_TEST1이라는 테이블을 만들어서 
+사용자 SCOTT에게 EMP_TEST1에 select, insert, update, delete 권한을 주었을때
+select * from emp_test1; 
+위의 형태로 해야만 select가 오류없이 성공한다.
+
+만약에 emp_test1이라는 테이블 내가 직접만들어서 사용하는 것처럼
+select *from emp_test1;
+위의 형태로 쓰려면 emp_test1이 test,emp.test1라는 형태라고 synonym (시노님)
+선언해 놓은 후에 사용하면 된다.
+
 dual 이라는 dummy table sys가 만들어서 synonym 만든후에
 public(누구나 전부 사용가능)으로 배포한 프로젝트이다.
 
